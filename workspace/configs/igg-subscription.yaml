@@ -1,0 +1,6 @@
+# iGG-iGuge 订阅配置
+name: iGG-iGuge
+type: http
+url: https://feed.iggv5.com/c/11669368-e191-407d-867f-90c5f87fbdf4/platform/clash/iGG-iGuge
+interval: 3600  # 每小时更新一次
+update: true

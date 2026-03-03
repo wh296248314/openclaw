@@ -1,0 +1,46 @@
+# Clash 订阅配置
+mixed-port: 7890
+socks-port: 7891
+port: 7892
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+# 代理配置（将从订阅链接获取）
+proxies:
+  # 订阅链接会自动填充这里
+
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - 🎯 全球直连
+      - DIRECT
+      - REJECT
+
+  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - DIRECT
+
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - REJECT
+
+rules:
+  - DOMAIN-SUFFIX,google.com,🚀 节点选择
+  - DOMAIN-SUFFIX,github.com,🚀 节点选择
+  - DOMAIN-SUFFIX,youtube.com,🚀 节点选择
+  - DOMAIN-SUFFIX,twitter.com,🚀 节点选择
+  - DOMAIN-SUFFIX,facebook.com,🚀 节点选择
+  - DOMAIN-KEYWORD,instagram,🚀 节点选择
+  - DOMAIN-SUFFIX,openai.com,🚀 节点选择
+  - DOMAIN-SUFFIX,chatgpt.com,🚀 节点选择
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🚀 节点选择

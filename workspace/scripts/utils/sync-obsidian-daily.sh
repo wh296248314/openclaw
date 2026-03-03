@@ -1,0 +1,159 @@
+#!/bin/bash
+
+# Obsidian Daily Notes 同步脚本
+# 将 workspace/memory/YYYY-MM-DD.md 同步到 Obsidian Daily Notes
+
+WORKSPACE_DIR="/home/admin/openclaw/workspace"
+OBSIDIAN_DIR="/home/admin/Documents/LifeOS"
+DAILY_NOTES_DIR="$OBSIDIAN_DIR/0. 周期笔记"
+
+# 获取今天的日期
+TODAY=$(date "+%Y-%m-%d")
+YEAR=$(date "+%Y")
+MONTH=$(date "+%m")
+
+# 源文件：workspace 中的每日记忆
+SOURCE_FILE="$WORKSPACE_DIR/memory/$TODAY.md"
+
+# 目标文件：Obsidian Daily Notes
+TARGET_DIR="$DAILY_NOTES_DIR/$YEAR/Daily/$MONTH"
+TARGET_FILE="$TARGET_DIR/$TODAY.md"
+
+echo "🔄 开始同步 Obsidian Daily Notes: $TODAY"
+echo "📁 源文件: $SOURCE_FILE"
+echo "📁 目标文件: $TARGET_FILE"
+
+# 检查源文件是否存在
+if [ ! -f "$SOURCE_FILE" ]; then
+    echo "⚠️ 源文件不存在: $SOURCE_FILE"
+    echo "📝 创建新的每日记忆文件..."
+    
+    # 创建基本的每日记忆模板
+    cat > "$SOURCE_FILE" << EOF
+# $TODAY 工作记录
+
+## ✅ 已完成任务
+
+## 📋 进行中任务
+
+## 🔄 待处理
+
+## 📝 系统配置与更新
+
+## 💭 想法与笔记
+EOF
+    
+    echo "✅ 已创建新的每日记忆文件"
+fi
+
+# 确保目标目录存在
+mkdir -p "$TARGET_DIR"
+
+# 读取源文件内容并过滤（只保留用户任务相关部分）
+if [ -f "$SOURCE_FILE" ]; then
+    # 使用awk过滤：只保留以#开头的标题行，以及以## ✅、## 🔄、## 📋、## 📊开头的章节
+    # 这些是用户的任务和待办事项，过滤掉我的工作记录（如"工作记录"、"早安问候"、"系统配置"等）
+    SOURCE_CONTENT=$(awk '
+BEGIN { in_section=0; print_header=1 }
+/^# / { if (print_header) print $0; print_header=0; next }
+/^## ✅ |^## 🔄 |^## 📋 |^## 📊 / { 
+    in_section=1; 
+    print $0; 
+    next 
+}
+/^## / && !/^## ✅ |^## 🔄 |^## 📋 |^## 📊 / { 
+    in_section=0; 
+    next 
+}
+in_section { print $0 }
+' "$SOURCE_FILE")
+    
+    echo "📊 已过滤用户任务信息（过滤掉我的工作记录）"
+    
+    # 检查目标文件是否存在
+    if [ -f "$TARGET_FILE" ]; then
+        echo "📄 目标文件已存在，检查是否需要更新..."
+        
+        # 读取目标文件的前几行（元数据部分）
+        TARGET_HEADER=$(head -20 "$TARGET_FILE")
+        
+        # 检查是否包含 Obsidian 元数据
+        if echo "$TARGET_HEADER" | grep -q "aliases:"; then
+            echo "📋 目标文件包含 Obsidian 元数据，保留元数据部分..."
+            
+            # 提取元数据部分（直到第一个空行后的内容）
+            METADATA_SECTION=""
+            IN_METADATA=true
+            while IFS= read -r line; do
+                if [ "$IN_METADATA" = true ]; then
+                    METADATA_SECTION="$METADATA_SECTION$line\n"
+                    if [ -z "$line" ]; then
+                        IN_METADATA=false
+                    fi
+                fi
+            done < "$TARGET_FILE"
+            
+            # 合并元数据和源内容
+            echo -e "${METADATA_SECTION}\n## 🧠 工作记录（自动同步）\n\n$SOURCE_CONTENT" > "$TARGET_FILE.tmp"
+        else
+            # 没有元数据，直接替换
+            echo "$SOURCE_CONTENT" > "$TARGET_FILE.tmp"
+        fi
+        
+        # 检查是否有实际变化
+        if diff -q "$TARGET_FILE" "$TARGET_FILE.tmp" > /dev/null; then
+            echo "📭 内容无变化，跳过更新"
+            rm "$TARGET_FILE.tmp"
+        else
+            mv "$TARGET_FILE.tmp" "$TARGET_FILE"
+            echo "✅ 已更新 Obsidian Daily Note"
+        fi
+    else
+        # 目标文件不存在，创建新的
+        echo "📄 创建新的 Obsidian Daily Note..."
+        
+        # 创建带有基本元数据的 Daily Note
+        cat > "$TARGET_FILE" << EOF
+---
+aliases:
+  - 日程
+banner: sea
+---
+
+## 🧠 工作记录（自动同步）
+
+$SOURCE_CONTENT
+
+## 日常记录
+%%你的记录%%
+
+## 输出
+%%打卡不会被统计为任务%%
+
+## 精力分配
+%%今日的项目列表，根据耗时情况，自动统计项目耗时占比%%
+\`\`\`LifeOS
+ProjectListByTime
+\`\`\`
+
+## 今日截止
+%%今日截止的笔记列表，从所有的笔记中提取%%
+\`\`\`LifeOS
+TaskDueListByTime
+\`\`\`
+
+## 今日完成
+%%今日完成的任务列表，从所有的笔记中提取%%
+\`\`\`LifeOS
+TaskDoneListByTime
+\`\`\`
+EOF
+        
+        echo "✅ 已创建新的 Obsidian Daily Note"
+    fi
+else
+    echo "❌ 源文件不存在且创建失败"
+    exit 1
+fi
+
+echo "🎉 Obsidian Daily Notes 同步完成！"

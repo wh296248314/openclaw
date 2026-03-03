@@ -1,0 +1,53 @@
+{
+  "monitoring_config": {
+    "timeout_thresholds": {
+      "critical": 30,
+      "high": 60,
+      "medium": 120,
+      "low": 300
+    },
+    "check_intervals": {
+      "critical": 10,
+      "high": 30,
+      "medium": 60,
+      "low": 120
+    },
+    "max_warnings": {
+      "critical": 5,
+      "high": 3,
+      "medium": 2,
+      "low": 1
+    },
+    "notification_channels": ["log", "desktop"],
+    "enable_resource_monitoring": true,
+    "data_retention_days": 30,
+    "enable_performance_metrics": true,
+    "enable_trend_analysis": true,
+    "alert_escalation": {
+      "level1": {"delay_minutes": 1, "channels": ["log"]},
+      "level2": {"delay_minutes": 5, "channels": ["log", "desktop"]},
+      "level3": {"delay_minutes": 15, "channels": ["log", "desktop", "email"]}
+    }
+  },
+  "system_monitoring": {
+    "enable_cpu_monitoring": true,
+    "enable_memory_monitoring": true,
+    "enable_disk_monitoring": true,
+    "enable_network_monitoring": true,
+    "thresholds": {
+      "cpu_warning": 80,
+      "cpu_critical": 95,
+      "memory_warning": 85,
+      "memory_critical": 95,
+      "disk_warning": 90,
+      "disk_critical": 98
+    }
+  },
+  "reporting": {
+    "daily_report": true,
+    "weekly_summary": true,
+    "monthly_analysis": true,
+    "report_time": "08:00",
+    "report_recipients": []
+  }
+}

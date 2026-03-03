@@ -1,0 +1,8 @@
+{
+  "reminder_count": 0,
+  "start_time": 1772444212067,
+  "last_check": 1772444212067,
+  "max_reminders": 3,
+  "max_duration_minutes": 30,
+  "monitoring_active": true
+}
