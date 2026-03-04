@@ -12,11 +12,13 @@
 7. **healthcheck** - 系统健康检查
 8. **weather** - 天气查询
 
-### ⚠️ 需要修复的技能（4个）
-1. **url-digest** - 缺少SKILL.md文件
-2. **pptx-creator** - 缺少SKILL.md文件
-3. **hn** - 缺少SKILL.md文件
-4. **skill-creator** - 技能创建工具（文档不完整）
+### ✅ 已修复的技能（3个）
+1. **url-digest** - ✅ 已修复目录结构，SKILL.md完整
+2. **pptx-creator** - ✅ 已修复目录结构，SKILL.md完整  
+3. **hn** - ✅ 已修复目录结构，SKILL.md完整
+
+### ⚠️ 需要验证的技能（1个）
+1. **skill-creator** - 技能创建工具（需要功能测试）
 
 ### 🔧 Feishu相关技能（4个）
 1. **feishu-doc** - 飞书文档操作
@@ -58,22 +60,24 @@
 └── weather/            # 天气查询
 ```
 
-## 🔧 修复计划
+## 🔧 修复完成情况
 
-### 优先级1：补充缺失文档
-1. 为`url-digest`创建SKILL.md
-2. 为`pptx-creator`创建SKILL.md
-3. 为`hn`创建SKILL.md
+### ✅ 已完成修复
+1. **目录结构修复**：
+   - ✅ `url-digest` - 修复嵌套目录，SKILL.md完整
+   - ✅ `pptx-creator` - 修复嵌套目录，SKILL.md完整
+   - ✅ `hn` - 修复嵌套目录，SKILL.md完整
 
-### 优先级2：API配置验证
-1. 测试`qwen-image`的阿里云API配置
-2. 测试`amap-traffic`的高德API配置
-3. 验证`stock-watcher`的数据源
+### 🔄 待验证项目
+1. **API配置验证**：
+   - 测试`qwen-image`的阿里云API配置
+   - 测试`amap-traffic`的高德API配置
+   - 验证`stock-watcher`的数据源
 
-### 优先级3：功能测试
-1. 测试所有技能的基本功能
-2. 验证依赖是否完整
-3. 修复发现的任何问题
+2. **功能测试**：
+   - 测试所有技能的基本功能
+   - 验证依赖是否完整
+   - 修复发现的任何问题
 
 ## 📝 使用指南
 
