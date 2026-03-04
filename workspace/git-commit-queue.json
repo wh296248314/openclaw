@@ -1,11 +1,17 @@
 {
   "queue_id": "2026-03-04-0940",
   "created_at": "2026-03-04T09:41:30+08:00",
-  "status": "pending",
+  "status": "completed_successfully",
   "repository": "openclaw",
   "remote_url": "https://github.com/wh296248314/openclaw.git",
-  "pending_commits": 24,
+  "pending_commits": 0,
   "commits": [
+    {
+      "hash": "3dbc8ab",
+      "message": "Update commit-log.md and queue file with 11:54 sync check and final pre-retry status",
+      "timestamp": "2026-03-04T11:56:45+08:00",
+      "files": ["commit-log.md", "git-commit-queue.json"]
+    },
     {
       "hash": "457598e",
       "message": "Update memory and queue files with 11:54 sync check and 12:00 Git retry countdown",
@@ -281,20 +287,40 @@
     "network_basic": "normal",
     "dns_resolution": "normal",
     "github_api": "normal",
-    "git_remote": "failed",
+    "git_remote": "normal",
     "git_token_valid": true,
     "lifeos_synced": true,
-    "issue_type": "git_protocol_layer",
-    "last_test": "2026-03-04T09:41:18+08:00"
+    "issue_type": "resolved",
+    "last_test": "2026-03-04T12:01:30+08:00",
+    "resolution_time": "2026-03-04T12:01:30+08:00",
+    "total_commits_pushed": 25,
+    "push_range": "5d8800a..3dbc8ab"
   },
   "retry_schedule": [
     "2026-03-04T10:00:00+08:00",
     "2026-03-04T11:00:00+08:00",
-    "2026-03-04T12:00:00+08:00",
-    "2026-03-04T14:00:00+08:00",
-    "2026-03-04T16:00:00+08:00",
-    "2026-03-04T19:00:00+08:00",
-    "2026-03-04T23:00:00+08:00"
+    "2026-03-04T12:00:00+08:00"
+  ],
+  "retry_results": [
+    {
+      "time": "2026-03-04T10:00:00+08:00",
+      "status": "success",
+      "commits_pushed": 9,
+      "push_range": "7c8543a..1b1ab22"
+    },
+    {
+      "time": "2026-03-04T11:00:00+08:00",
+      "status": "failed",
+      "reason": "push_hung_github_connection_timeout",
+      "action": "killed_process_193229"
+    },
+    {
+      "time": "2026-03-04T12:01:30+08:00",
+      "status": "success",
+      "commits_pushed": 25,
+      "push_range": "5d8800a..3dbc8ab",
+      "notes": "network_recovered_automatic_push_successful"
+    }
   ],
   "backup_plan": {
     "local_backup": "/home/admin/openclaw/workspace/backups/git-commits",
