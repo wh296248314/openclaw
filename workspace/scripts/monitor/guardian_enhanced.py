@@ -44,7 +44,7 @@ class EnhancedGuardian:
     
     def __init__(self):
         self.data_file = "/home/admin/openclaw/workspace/data/guardian_tasks.json"
-        self.config_file = "/home/admin/openclaw/workspace/configs/guardian_config.json"
+        self.config_file = "/home/admin/openclaw/workspace/configs/monitor/guardian_config.json"
         self.tasks: Dict[str, Dict] = self._load_tasks()
         self.config = self._load_config()
         self.running = False
