@@ -6,65 +6,101 @@
 3. **维护简单**：定期整理，保持整洁
 4. **安全可控**：重要文件有备份，临时文件可清理
 
-## 📁 目录结构
+## 📁 目录结构（优化后）
+
+### 根目录核心文件
+- `AGENTS.md` - Agent工作空间说明
+- `SOUL.md` - Agent人格定义
+- `USER.md` - 用户信息
+- `TOOLS.md` - 工具配置
+- `IDENTITY.md` - Agent身份
+- `HEARTBEAT.md` - 心跳任务
+- `CONFIG_README.md` - 配置文件说明
+- `DIRECTORY_STRUCTURE.md` - 目录结构说明
 
 ### configs/ - 配置文件
-存放所有配置文件，包括：
-- `SOUL.md` - 我的灵魂定义
-- `USER.md` - 用户信息
-- `MEMORY.md` - 长期记忆
-- `TOOLS.md` - 工具配置
-- `*.json` - 各种JSON配置文件
-- `*.yaml` - YAML配置文件
+```
+configs/
+├── openclaw/     # OpenClaw系统配置
+├── monitor/      # 监控配置
+│   ├── guardian_config.json
+│   ├── timeout_guardian_history.json
+│   ├── timeout_guardian_optimized_config.json
+│   └── timeout_monitor_state.json
+└── system/       # 系统配置
+    └── obsidian-sync-state.json
+```
+
+### data/ - 数据文件
+```
+data/
+├── guardian_tasks.json      # 监控卫士任务数据
+├── monitor/                 # 监控数据
+│   └── simple_tasks.json
+└── system/                  # 系统数据
+```
+
+### docs/ - 文档
+```
+docs/
+├── README.md               # 文档索引
+├── guides/                 # 使用指南
+│   ├── 钉钉通知配置指南.md
+│   └── 虎码输入法相关指南.md
+├── references/             # 参考文档
+│   ├── 智能超时监控卫士相关文档.md
+│   └── SCRM相关分析报告.md
+├── plans/                  # 计划文档
+│   └── 实施计划相关文档.md
+└── 其他文档.md
+```
 
 ### scripts/ - 脚本文件
-#### monitor/ - 监控相关脚本
-- 智能超时监控卫士所有相关文件
-- 测试脚本、演示脚本
-- 启动/停止/检查脚本
-
-#### system/ - 系统工具脚本
-- 系统级工具：clash代理、Obsidian同步等
-- 安装脚本、配置脚本
-
-#### utils/ - 通用工具脚本
-- 通用Python工具
-- 数据处理脚本
-- 测试工具
-
-### docs/ - 文档文件
-- 项目文档、使用指南
-- 分析报告、计划文档
-- 技术文档、配置说明
-
-### logs/ - 日志文件
-- 所有应用程序日志
-- 监控日志、运行日志
-- 按日期或应用分类
+```
+scripts/
+├── monitor/                # 监控相关脚本
+│   ├── guardian_enhanced.py
+│   ├── guardian_final_fixed.py
+│   └── timeout_guardian.py
+├── system/                 # 系统工具脚本
+├── utils/                  # 通用工具脚本
+└── projects/               # 项目脚本
+```
 
 ### projects/ - 项目文件
-- 具体项目文件
-- 大文件、二进制文件
-- 项目相关资源
+```
+projects/
+├── guardian/              # 监控卫士项目
+├── obsidian/              # Obsidian项目
+└── clash-party/           # Clash Party项目
+```
 
-### temp/ - 临时文件
-- 临时测试文件
-- 待处理文件
-- 短期存储文件
+### logs/ - 日志文件
+```
+logs/
+├── monitor/               # 监控日志
+│   ├── guardian_enhanced.log
+│   └── guardian_final.log
+└── system/                # 系统日志
+```
+
+### memory/ - 记忆文件（特殊目录）
+- 每日工作记录 (`YYYY-MM-DD.md`)
+- 长期记忆维护文件
+
+### lifeos/ - Obsidian笔记系统（特殊目录）
+- 个人知识管理系统
+- 保持原有结构
 
 ### archive/ - 归档文件
 - 旧版本备份
 - 历史文件归档
 - 不再活跃的文件
 
-### memory/ - 记忆文件（特殊目录）
-- 每日工作记录
-- 长期记忆备份
-- 回忆日志
-
-### lifeos/ - Obsidian笔记系统（特殊目录）
-- 个人知识管理系统
-- 保持原有结构
+### temp/ - 临时文件
+- 临时测试文件
+- 待处理文件
+- 短期存储文件
 
 ## 🔄 文件命名规范
 ### 脚本文件
@@ -126,3 +162,4 @@
 
 ---
 *保持整洁，提高效率。*
+*最后更新：2026-03-04 工作空间优化完成*
