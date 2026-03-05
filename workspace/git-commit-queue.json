@@ -1,11 +1,18 @@
 {
   "queue_id": "2026-03-04-0940",
   "created_at": "2026-03-04T09:41:30+08:00",
-  "status": "completed_successfully",
+  "status": "pending_retry",
   "repository": "openclaw",
   "remote_url": "https://github.com/wh296248314/openclaw.git",
-  "pending_commits": 0,
-  "commits": [],
+  "pending_commits": 1,
+  "commits": [
+    {
+      "hash": "8da2601",
+      "message": "15:50 自动提交：添加每日总结文件并更新系统监控状态",
+      "time": "2026-03-05T15:50:00+08:00",
+      "files": ["memory/summary_2026-03-05.json", "memory/summary_2026-03-05.txt"]
+    }
+  ],
   "diagnosis": {
     "network_basic": "normal",
     "dns_resolution": "normal",
@@ -14,9 +21,9 @@
     "git_token_valid": true,
     "lifeos_synced": true,
     "issue_type": "resolved",
-    "last_test": "2026-03-04T19:09:00+08:00",
-    "resolution_time": "2026-03-04T19:09:00+08:00",
-    "total_commits_pushed": 106,
+    "last_test": "2026-03-05T15:50:00+08:00",
+    "resolution_time": "2026-03-05T15:50:00+08:00",
+    "total_commits_pushed": 108,
     "push_ranges": [
       "7c8543a..1b1ab22",
       "5d8800a..3dbc8ab",
