@@ -4,7 +4,7 @@
   "status": "pending_retry",
   "repository": "openclaw",
   "remote_url": "https://github.com/wh296248314/openclaw.git",
-  "pending_commits": 6,
+  "pending_commits": 9,
   "commits": [
     {
       "hash": "2245d47",
@@ -34,6 +34,24 @@
       "hash": "6b9354b",
       "message": "Update memory file with 14:14 sync check and ongoing ultra-high-frequency network issue handling (12 minutes)",
       "time": "2026-03-06T14:15:00+08:00",
+      "files": ["memory/2026-03-06.md"]
+    },
+    {
+      "hash": "342dbfb",
+      "message": "Update git-commit-queue.json to track 6 pending commits after 14:14 ultra-high-frequency network issue",
+      "time": "2026-03-06T14:16:00+08:00",
+      "files": ["git-commit-queue.json"]
+    },
+    {
+      "hash": "86a6b11",
+      "message": "Update workspace with file reorganizations and memory file format change",
+      "time": "2026-03-06T14:27:00+08:00",
+      "files": ["memory/2026-03-06.md", "git-commit-queue.json", "main", "memory/2025-03-21.md", "\345\262\227\351\241\266\346\224\257\346\214\201\344\274\232\350\256\256\350\256\260\345\275\225_2025-03-20.md", "\345\262\227\351\241\266\346\224\257\346\214\201\344\274\232\350\256\256\350\256\260\345\275\225_\346\217\220\344\272\244\346\200\273\347\273\223.md", "\345\262\227\351\241\266\346\224\257\346\214\201\344\274\232\350\256\256\350\256\260\345\275\225_\346\217\220\344\272\244\346\200\273\347\273\223_\344\277\256\346\255\243\347\211\210.md", "\345\262\227\351\241\266\346\224\257\346\214\201\344\274\232\350\256\256\350\256\260\345\275\225_\350\241\250\346\240\274\347\211\210_2025-03-20.md"]
+    },
+    {
+      "hash": "f8340ce",
+      "message": "Update memory file with 14:26 sync check and ongoing ultra-high-frequency network issue handling (24 minutes)",
+      "time": "2026-03-06T14:28:00+08:00",
       "files": ["memory/2026-03-06.md"]
     }
   ],
