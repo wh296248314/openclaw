@@ -1,30 +1,11 @@
 {
   "queue_id": "2026-03-04-0940",
   "created_at": "2026-03-04T09:41:30+08:00",
-  "status": "pending_retry",
+  "status": "completed_successfully",
   "repository": "openclaw",
   "remote_url": "https://github.com/wh296248314/openclaw.git",
-  "pending_commits": 3,
-  "commits": [
-    {
-      "hash": "981b5f0",
-      "message": "Update memory file with 09:18 sync check and network intermittent issue recurrence after 16-minute stability",
-      "time": "2026-03-06T09:19:00+08:00",
-      "files": ["memory/2026-03-06.md"]
-    },
-    {
-      "hash": "1663925",
-      "message": "Update git-commit-queue.json to track pending commit after network issue recurrence",
-      "time": "2026-03-06T09:20:00+08:00",
-      "files": ["git-commit-queue.json"]
-    },
-    {
-      "hash": "4835ca0",
-      "message": "Update memory file with 09:23 sync check and add update_cron_to_dingtalk.py script",
-      "time": "2026-03-06T09:24:00+08:00",
-      "files": ["memory/2026-03-06.md", "update_cron_to_dingtalk.py"]
-    }
-  ],
+  "pending_commits": 0,
+  "commits": [],
   "diagnosis": {
     "network_basic": "normal",
     "dns_resolution": "normal",
@@ -33,9 +14,9 @@
     "git_token_valid": true,
     "lifeos_synced": true,
     "issue_type": "resolved",
-    "last_test": "2026-03-06T09:02:00+08:00",
-    "resolution_time": "2026-03-06T09:02:00+08:00",
-    "total_commits_pushed": 152,
+    "last_test": "2026-03-06T09:28:00+08:00",
+    "resolution_time": "2026-03-06T09:28:00+08:00",
+    "total_commits_pushed": 161,
     "push_ranges": [
       "7c8543a..1b1ab22",
       "5d8800a..3dbc8ab",
