@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "monitoring": {
+      "version": "1.0.0",
+      "installedAt": 1773585734363
+    },
+    "kubernetes-devops": {
+      "version": "1.0.0",
+      "installedAt": 1773586143049
+    }
+  }
+}
