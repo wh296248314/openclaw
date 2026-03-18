@@ -1,13 +1,15 @@
-# Logs and temp
-*.log
+# Ignore sensitive data
+agents/*/sessions/
+agents/*/agent/auth-profiles.json
+agents/*/agent/workspace/
+feishu/dedup/
+devices/paired.json
+identity/
+*.bak
 *.tmp
-
-# Session files (too large, personal)
-**/sessions/
-node_modules/
+logs/
 
 # Keep these
-!agents/
-!extensions/
 !workspace/
-!openclaw.json
+!scripts/
+!extensions/

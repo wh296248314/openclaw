@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.13",
-    "lastTouchedAt": "2026-03-17T08:50:59.702Z"
+    "lastTouchedAt": "2026-03-16T17:07:09.979Z"
   },
   "wizard": {
     "lastRunAt": "2026-03-16T17:07:09.972Z",
@@ -57,9 +57,6 @@
         "minimax/MiniMax-M2.5-highspeed": {}
       },
       "workspace": "/home/pixiu/.openclaw/workspace",
-      "compaction": {
-        "mode": "safeguard"
-      },
       "timeoutSeconds": 300
     },
     "list": [
@@ -271,7 +268,6 @@
     "port": 18789,
     "mode": "local",
     "bind": "loopback",
-    "customBindHost": "0.0.0.0",
     "controlUi": {
       "allowedOrigins": [
         "*"
@@ -295,7 +291,8 @@
         "reminders.add",
         "sms.send"
       ]
-    }
+    },
+    "customBindHost": "0.0.0.0"
   },
   "skills": {
     "install": {
@@ -304,14 +301,10 @@
   },
   "plugins": {
     "allow": [
-      "feishu",
-      "lossless-claw"
+      "feishu"
     ],
     "entries": {
       "feishu": {
-        "enabled": true
-      },
-      "lossless-claw": {
         "enabled": true
       }
     },
