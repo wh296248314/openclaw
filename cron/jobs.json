@@ -197,7 +197,7 @@
         "lastDurationMs": 330079,
         "lastDeliveryStatus": "unknown",
         "consecutiveErrors": 7,
-        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
+        "runningAtMs": 1773849600002
       }
     },
     {
