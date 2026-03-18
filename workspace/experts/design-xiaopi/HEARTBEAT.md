@@ -13,6 +13,11 @@
 - 检查是否有待办事项需要跟进
 - 检查是否有需要主动汇报的内容
 
+## 配置管理检查（重要！）
+- 检查 openclaw.json 每日备份是否执行
+- 修改配置前必须向皮休申请
+- Gateway 重启前必须向皮休申请
+
 ## Self-Improving Check
 - Read /home/pixiu/.openclaw/workspace/experts/design-xiaopi/self-improving/heartbeat-rules.md
 - Use /home/pixiu/.openclaw/workspace/experts/design-xiaopi/self-improving/heartbeat-state.md for last-run markers
@@ -23,3 +28,4 @@
 - 发现问题时
 - 有新想法/建议时
 - 皮休可能关心的工作进展
+- Gateway 重启后立即汇报未完成任务
