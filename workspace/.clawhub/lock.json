@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "skills": {
+    "monitoring": {
+      "version": "1.0.0",
+      "installedAt": 1773585734363
+    },
+    "kubernetes-devops": {
+      "version": "1.0.0",
+      "installedAt": 1773586143049
+    },
+    "skill-creator": {
+      "version": "0.1.0",
+      "installedAt": 1773797851173
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1773798379804
+    },
+    "self-improving": {
+      "version": "1.2.16",
+      "installedAt": 1773798422283
+    },
+    "planning-with-files": {
+      "version": "2.22.0",
+      "installedAt": 1773798426951
+    },
+    "notebooklm-skill": {
+      "version": "0.1.0",
+      "installedAt": 1773798432424
+    },
+    "using-superpowers": {
+      "version": "0.1.0",
+      "installedAt": 1773798436415
+    },
+    "file-organizer-zh": {
+      "version": "1.0.0",
+      "installedAt": 1773798481868
+    },
+    "mh-summarize": {
+      "version": "1.0.0",
+      "installedAt": 1773798489699
+    },
+    "openclaw-mcp-plugin": {
+      "version": "0.1.1",
+      "installedAt": 1773801790946
+    },
+    "mcp-skill": {
+      "version": "1.0.0",
+      "installedAt": 1773801795508
+    },
+    "mcp-lark": {
+      "version": "1.0.0",
+      "installedAt": 1773801903513
+    },
+    "filesystem-mcp": {
+      "version": "1.0.0",
+      "installedAt": 1773801913880
+    }
+  }
+}

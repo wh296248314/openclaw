@@ -1,0 +1,50 @@
+# 学习领域配置文件
+# 定义需要持续关注的领域和关键词
+
+## 关注的领域
+domains:
+  - name: AI_Agents
+    keywords:
+      - multi-agent systems
+      - agent orchestration
+      - AI agent frameworks
+    priority: high
+
+  - name: System_Architecture
+    keywords:
+      - distributed systems
+      - microservices patterns
+      - system design
+    priority: medium
+
+  - name: Database
+    keywords:
+      - PostgreSQL
+      - database optimization
+      - data modeling
+    priority: medium
+
+  - name: DevOps
+    keywords:
+      - container orchestration
+      - CI/CD
+      - infrastructure as code
+    priority: low
+
+## 学习任务配置
+learning:
+  # 技能发现频率 (每几天一次)
+  skill_discovery_interval: 3
+
+  # 技术搜索频率 (每周几次)
+  tech_scan_interval: 7
+
+  # 每次发现技能数量上限
+  max_skills_per_discovery: 5
+
+  # 技能评分权重
+  scoring:
+    downloads: 0.3
+    stars: 0.3
+    recency: 0.2
+    relevance: 0.2
