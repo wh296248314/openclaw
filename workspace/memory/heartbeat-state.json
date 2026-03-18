@@ -1,0 +1,11 @@
+{
+  "lastChecks": {
+    "email": null,
+    "calendar": null,
+    "weather": null
+  },
+  "lastHealthCheck": 1742335980,
+  "lastGatewayDown": 1742322000,
+  "gatewayDownDuration": "5h",
+  "scriptFixApplied": "gateway-auto-restart.sh - pgrep替代systemctl"
+}

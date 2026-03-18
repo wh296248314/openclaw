@@ -114,6 +114,7 @@
 ### 2. 自动重启
 - 等待5秒后自动重启，不需要皮休手动重启
 - 使用脚本：`/home/pixiu/.openclaw/scripts/gateway-auto-restart.sh`
+- **⚠️ 重要修复（2026-03-19）**：脚本原用`systemctl --user`检测，但Gateway是前台进程导致误报。已改为`pgrep -f "openclaw-gateway"`检测
 
 ### 3. 意外中断自动恢复
 - **触发条件**：断网、断连、服务崩溃等意外情况

@@ -43,15 +43,15 @@ get_restart_reason() {
 
 # 检查gateway是否运行
 check_gateway() {
-    if systemctl --user is-active --quiet openclaw-gateway; then
+    if pgrep -f "openclaw-gateway" > /dev/null 2>&1; then
         log "Gateway is running"
         return 0
     else
         reason=$(get_restart_reason)
         log "Gateway is NOT running, starting... Reason: $reason"
-        systemctl --user start openclaw-gateway
-        sleep 2
-        if systemctl --user is-active --quiet openclaw-gateway; then
+        cd /home/pixiu/.openclaw && nohup openclaw gateway start > /dev/null 2>&1 &
+        sleep 3
+        if pgrep -f "openclaw-gateway" > /dev/null 2>&1; then
             log "Gateway started successfully after: $reason"
             return 0
         else
@@ -74,14 +74,14 @@ monitor_loop() {
             continue
         fi
         
-        if ! systemctl --user is-active --quiet openclaw-gateway; then
+        if ! pgrep -f "openclaw-gateway" > /dev/null 2>&1; then
             consecutive_failures=$((consecutive_failures + 1))
             reason=$(get_restart_reason)
             log "Gateway down detected (check #$consecutive_failures). Reason: $reason"
             
             if [ $consecutive_failures -ge 2 ]; then
                 log "Attempting restart due to: $reason"
-                systemctl --user restart openclaw-gateway
+                cd /home/pixiu/.openclaw && nohup openclaw gateway start > /dev/null 2>&1 &
                 sleep 5
                 consecutive_failures=0
             fi
