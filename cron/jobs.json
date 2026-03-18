@@ -105,7 +105,7 @@
       "description": "定期发现和推荐ClawHub技能",
       "enabled": true,
       "createdAtMs": 1773585117224,
-      "updatedAtMs": 1773585117224,
+      "updatedAtMs": 1773844374125,
       "schedule": {
         "kind": "every",
         "everyMs": 259200000,
@@ -122,7 +122,14 @@
         "channel": "last"
       },
       "state": {
-        "nextRunAtMs": 1773844317224
+        "nextRunAtMs": 1774103517231,
+        "lastRunAtMs": 1773844317231,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 56894,
+        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
       }
     },
     {

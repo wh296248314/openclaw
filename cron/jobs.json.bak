@@ -7,7 +7,7 @@
       "name": "每日设计趋势学习",
       "enabled": true,
       "createdAtMs": 1773584776403,
-      "updatedAtMs": 1773709320015,
+      "updatedAtMs": 1773795720025,
       "schedule": {
         "kind": "cron",
         "expr": "0 9 * * *",
@@ -25,15 +25,15 @@
         "channel": "last"
       },
       "state": {
-        "nextRunAtMs": 1773795600000,
-        "lastRunAtMs": 1773709200005,
+        "nextRunAtMs": 1773882000000,
+        "lastRunAtMs": 1773795600007,
         "lastRunStatus": "error",
         "lastStatus": "error",
-        "lastDurationMs": 120010,
+        "lastDurationMs": 120018,
         "lastErrorReason": "timeout",
         "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 2,
-        "runningAtMs": 1773795600004
+        "consecutiveErrors": 3,
+        "lastError": "cron: job execution timed out"
       }
     },
     {
@@ -122,7 +122,8 @@
         "channel": "last"
       },
       "state": {
-        "nextRunAtMs": 1773844317224
+        "nextRunAtMs": 1773844317224,
+        "runningAtMs": 1773844317225
       }
     },
     {

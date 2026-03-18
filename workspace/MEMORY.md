@@ -197,3 +197,29 @@
 
 *96GB显存很强大！可运行百亿参数模型*
 *但需安装ROCm才能使用GPU加速*
+
+---
+
+## Ollama本地模型部署（2026-03-18）
+
+### Ollama配置
+- 版本: 0.18.0
+- 服务: localhost:11434
+- GPU支持: ✅ Vulkan已启用
+- GPU: Radeon 8060S (111.5 GB VRAM)
+
+### 已安装模型
+| 模型 | 大小 | 状态 |
+|------|------|------|
+| qwen2.5:7b | 4.7GB | 下载中... |
+
+### 使用方法
+```bash
+# 运行模型
+ollama run qwen2.5:7b
+
+# API调用
+curl http://localhost:11434/api/generate -d '{"model":"qwen2.5:7b","prompt":"你好"}'
+```
+
+*可用GPU加速，111.5GB显存可运行大模型*
