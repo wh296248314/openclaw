@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "16c98c6e-c6cc-4cf5-89ef-54c1dbfaabcb",
+      "agentId": "design-xiaopi",
+      "name": "每日设计趋势学习",
+      "enabled": true,
+      "createdAtMs": 1773584776403,
+      "updatedAtMs": 1773709320015,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每日设计趋势学习任务：搜索最新的UI设计趋势、交互设计案例、用户体验研究，更新设计趋势记录",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773795600000,
+        "lastRunAtMs": 1773709200005,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 120010,
+        "lastErrorReason": "timeout",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 2,
+        "runningAtMs": 1773795600004
+      }
+    },
+    {
+      "id": "219d960b-6989-4854-9f08-9312cb78d921",
+      "agentId": "design-xiaopi",
+      "name": "每周设计灵感收集",
+      "enabled": true,
+      "createdAtMs": 1773584788210,
+      "updatedAtMs": 1773626520017,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * 1",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行每周设计灵感收集：搜索本周优秀设计案例、创意设计趋势、设计文章，整理本周设计灵感",
+        "timeoutSeconds": 120
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1774231200000,
+        "lastRunAtMs": 1773626400011,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 120006,
+        "lastError": "cron: job execution timed out",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 2,
+        "lastErrorReason": "timeout"
+      }
+    },
+    {
+      "id": "2ae1d7fb-e766-49c8-8b34-080c49dfa820",
+      "agentId": "design-xiaopi",
+      "name": "每月设计趋势深度分析",
+      "enabled": true,
+      "createdAtMs": 1773584808261,
+      "updatedAtMs": 1773584808261,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 1 * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行本月设计趋势深度分析：分析当月设计趋势变化、热门设计模式、用户研究洞察，生成月度设计报告",
+        "timeoutSeconds": 180
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1775008800000
+      }
+    },
+    {
+      "id": "5c50064b-5b12-4a07-9057-2c54cad5b876",
+      "agentId": "development-xiaopi",
+      "name": "技能发现学习",
+      "description": "定期发现和推荐ClawHub技能",
+      "enabled": true,
+      "createdAtMs": 1773585117224,
+      "updatedAtMs": 1773585117224,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 259200000,
+        "anchorMs": 1773585117224
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行学习任务：扫描ClawHub发现新技能，检查config.yaml中定义的关注领域，评估并推荐有用的技能。如果发现有用技能，详细说明并询问是否安装。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773844317224
+      }
+    },
+    {
+      "id": "fc1dc3e8-4f32-4515-b9a3-e6bf1610ded2",
+      "agentId": "development-xiaopi",
+      "name": "每日记忆回顾",
+      "description": "每天早上回顾之前的记忆",
+      "enabled": true,
+      "createdAtMs": 1773585225108,
+      "updatedAtMs": 1773792019097,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行记忆回顾：1) 读取memory/目录下的日记文件，了解昨天的工作内容；2) 读取MEMORY.md了解长期记忆；3) 用简短总结告知用户今天需要记得的重要事项。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      },
+      "state": {
+        "nextRunAtMs": 1773878400000,
+        "lastRunAtMs": 1773792000020,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 19077,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 4,
+        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
+      }
+    },
+    {
+      "id": "7b8eb030-5ddc-4821-bee1-fc05a27f05d9",
+      "agentId": "development-xiaopi",
+      "name": "下载AI模型",
+      "description": "凌晨下载AI模型",
+      "enabled": true,
+      "createdAtMs": 1773589205359,
+      "updatedAtMs": 1773763530091,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 0 0 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "开始下载AI模型。先检查 qwen2.5:72b 是否已存在，若不存在则执行 ollama pull qwen2.5:72b 下载。下载完成后汇报结果（模型大小、下载状态）。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last",
+        "target": "user:ou_e6e5396bd1372b156d59a73973917962"
+      },
+      "state": {
+        "nextRunAtMs": 1773849600000,
+        "lastRunAtMs": 1773763200012,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 330079,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 7,
+        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
+      }
+    },
+    {
+      "id": "1ea07133-0b5e-4345-96b4-d7ac309f455d",
+      "agentId": "main",
+      "name": "早安问候-含天气",
+      "description": "每天早上8:30发送早安问候（含天气）",
+      "enabled": true,
+      "createdAtMs": 1773630232481,
+      "updatedAtMs": 1773793910642,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 8 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "请发送早安问候晗哥，包含上海当前天气（用wttr.in获取）、日期、星期几，以及一句温暖的问候语"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu",
+        "to": "ou_ea69bacf230a850e9bf2bd8ad49f42ef"
+      },
+      "state": {
+        "nextRunAtMs": 1773880200000,
+        "lastRunAtMs": 1773793800031,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 110611,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 0,
+        "lastDelivered": true
+      }
+    }
+  ]
+}

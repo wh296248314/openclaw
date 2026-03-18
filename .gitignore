@@ -1,0 +1,13 @@
+# Logs and temp
+*.log
+*.tmp
+
+# Session files (too large, personal)
+**/sessions/
+node_modules/
+
+# Keep these
+!agents/
+!extensions/
+!workspace/
+!openclaw.json

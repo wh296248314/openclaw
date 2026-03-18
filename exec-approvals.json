@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "socket": {
+    "path": "/home/pixiu/.openclaw/exec-approvals.sock",
+    "token": "z1_4ViUEUXD-lGnzEaGSBPMkO6bpErcS"
+  },
+  "defaults": {},
+  "agents": {
+    "development-xiaopi": {
+      "allowlist": [
+        {
+          "id": "5afd8c68-169e-4b72-a200-668917abe1b6",
+          "pattern": "/usr/bin/echo",
+          "lastUsedAt": 1773677630381,
+          "lastUsedCommand": "echo \"test\"",
+          "lastResolvedPath": "/usr/bin/echo"
+        },
+        {
+          "id": "be5f2823-0e1c-4b6e-bbc0-5a4e9107cd78",
+          "pattern": "/usr/local/bin/ollama",
+          "lastUsedAt": 1773677633754
+        },
+        {
+          "id": "132972a4-7c74-4a97-b5f7-8dd79442245d",
+          "pattern": "/usr/bin/curl",
+          "lastUsedAt": 1773677916627
+        },
+        {
+          "id": "2fe1f567-ba03-4be7-921c-a804d227f593",
+          "pattern": "/home/pixiu/.npm-global/bin/openclaw",
+          "lastUsedAt": 1773677918893
+        }
+      ]
+    },
+    "main": {
+      "allowlist": [
+        {
+          "id": "9193750f-dcd2-44ce-aa32-9af299184369",
+          "pattern": "/usr/bin/whoami",
+          "lastUsedAt": 1773677726194,
+          "lastUsedCommand": "whoami",
+          "lastResolvedPath": "/usr/bin/whoami"
+        },
+        {
+          "id": "9685ef7b-74be-4146-8222-1845e51a6d75",
+          "pattern": "/usr/bin/pwd",
+          "lastUsedAt": 1773677618926,
+          "lastUsedCommand": "pwd",
+          "lastResolvedPath": "/usr/bin/pwd"
+        },
+        {
+          "id": "d51c6aed-fcc3-4f79-97f0-337773a4a311",
+          "pattern": "/usr/bin/rm",
+          "lastUsedAt": 1773677145380
+        },
+        {
+          "id": "4163c0e8-f8c1-42ce-ba73-7b63de605484",
+          "pattern": "/usr/bin/grep",
+          "lastUsedAt": 1773677282518,
+          "lastUsedCommand": "grep -n \"security\\|exec\\|allow\" /home/pixiu/.openclaw/openclaw.json | head -20",
+          "lastResolvedPath": "/usr/bin/grep"
+        },
+        {
+          "id": "88fdf8da-3b9d-4d1e-ae60-7d21185fb6c6",
+          "pattern": "/usr/bin/head",
+          "lastUsedAt": 1773677282520,
+          "lastUsedCommand": "grep -n \"security\\|exec\\|allow\" /home/pixiu/.openclaw/openclaw.json | head -20",
+          "lastResolvedPath": "/usr/bin/grep"
+        },
+        {
+          "id": "c8347f2e-bcbc-41eb-8375-9a67b4c448c0",
+          "pattern": "/usr/bin/sed",
+          "lastUsedAt": 1773677287351
+        },
+        {
+          "id": "fd900c5b-35b3-44fa-a7c4-41b729276c7f",
+          "pattern": "/usr/bin/ls",
+          "lastUsedAt": 1773677632308,
+          "lastUsedCommand": "ls ~/.npm-global/lib/node_modules/openclaw/skills/ | wc -l",
+          "lastResolvedPath": "/usr/bin/ls"
+        },
+        {
+          "id": "d226dd28-8e18-464e-8d50-cf186e4e49a0",
+          "pattern": "/usr/bin/sleep",
+          "lastUsedAt": 1773677541351
+        },
+        {
+          "id": "80249bcd-350c-4a2d-bc1e-30d0bce0380d",
+          "pattern": "/usr/bin/which",
+          "lastUsedAt": 1773677629158
+        },
+        {
+          "id": "69940f91-0311-460a-9eda-2a2a3af3cac4",
+          "pattern": "/usr/bin/wc",
+          "lastUsedAt": 1773677632308
+        },
+        {
+          "id": "65b338be-4f4c-49a9-9187-d164b5857bd9",
+          "pattern": "/usr/bin/date",
+          "lastUsedAt": 1773677640132
+        }
+      ]
+    }
+  }
+}

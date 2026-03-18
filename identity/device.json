@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "deviceId": "f480220e0125737cc509ee1b0e89832eba53ea30028117370a5a559469c3dca4",
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8ro5inydOEk2bXleyN8P7jSLUC2+SIkEPL8JsCGnjE4=\n-----END PUBLIC KEY-----\n",
+  "privateKeyPem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIHQ0beDfyNJlaW9s6nDPIQF0aeXgkJU8AlITDl1KejCz\n-----END PRIVATE KEY-----\n",
+  "createdAtMs": 1773543998759
+}
