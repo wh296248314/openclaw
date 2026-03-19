@@ -54,8 +54,7 @@
         "minimax/MiniMax-M2.5": {
           "alias": "Minimax"
         },
-        "minimax/MiniMax-M2.5-highspeed": {},
-        "ollama/qwen2.5:14b": {}
+        "minimax/MiniMax-M2.5-highspeed": {}
       },
       "workspace": "/home/pixiu/.openclaw/workspace",
       "timeoutSeconds": 300
@@ -102,8 +101,7 @@
         "id": "deployment-xiaopi",
         "name": "deployment-xiaopi",
         "workspace": "/home/pixiu/.openclaw/workspace/experts/deployment-xiaopi",
-        "agentDir": "/home/pixiu/.openclaw/agents/deployment-xiaopi/agent",
-        "model": "ollama/qwen2.5:14b"
+        "agentDir": "/home/pixiu/.openclaw/agents/deployment-xiaopi/agent"
       },
       {
         "id": "audit-xiaopi",
