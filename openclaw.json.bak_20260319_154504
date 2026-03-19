@@ -109,8 +109,7 @@
         "id": "audit-xiaopi",
         "name": "audit-xiaopi",
         "workspace": "/home/pixiu/.openclaw/workspace/experts/audit-xiaopi",
-        "agentDir": "/home/pixiu/.openclaw/agents/audit-xiaopi/agent",
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        "agentDir": "/home/pixiu/.openclaw/agents/audit-xiaopi/agent"
       },
       {
         "id": "taizi",
