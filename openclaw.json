@@ -337,7 +337,8 @@
           "enabled": true
         },
         "session-memory": {
-          "enabled": true
+          "enabled": true,
+          "messages": 30
         }
       }
     }
