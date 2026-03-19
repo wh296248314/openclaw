@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.13",
-    "lastTouchedAt": "2026-03-16T17:07:09.979Z"
+    "lastTouchedAt": "2026-03-19T02:31:40.308Z"
   },
   "wizard": {
     "lastRunAt": "2026-03-16T17:07:09.972Z",
@@ -108,6 +108,112 @@
         "name": "audit-xiaopi",
         "workspace": "/home/pixiu/.openclaw/workspace/experts/audit-xiaopi",
         "agentDir": "/home/pixiu/.openclaw/agents/audit-xiaopi/agent"
+      },
+      {
+        "id": "taizi",
+        "workspace": "/home/pixiu/.openclaw/workspace-taizi",
+        "subagents": {
+          "allowAgents": [
+            "zhongshu"
+          ]
+        }
+      },
+      {
+        "id": "zhongshu",
+        "workspace": "/home/pixiu/.openclaw/workspace-zhongshu",
+        "subagents": {
+          "allowAgents": [
+            "menxia",
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "menxia",
+        "workspace": "/home/pixiu/.openclaw/workspace-menxia",
+        "subagents": {
+          "allowAgents": [
+            "shangshu",
+            "zhongshu"
+          ]
+        }
+      },
+      {
+        "id": "shangshu",
+        "workspace": "/home/pixiu/.openclaw/workspace-shangshu",
+        "subagents": {
+          "allowAgents": [
+            "zhongshu",
+            "menxia",
+            "hubu",
+            "libu",
+            "bingbu",
+            "xingbu",
+            "gongbu",
+            "libu_hr"
+          ]
+        }
+      },
+      {
+        "id": "hubu",
+        "workspace": "/home/pixiu/.openclaw/workspace-hubu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "libu",
+        "workspace": "/home/pixiu/.openclaw/workspace-libu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "bingbu",
+        "workspace": "/home/pixiu/.openclaw/workspace-bingbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "xingbu",
+        "workspace": "/home/pixiu/.openclaw/workspace-xingbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "gongbu",
+        "workspace": "/home/pixiu/.openclaw/workspace-gongbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "libu_hr",
+        "workspace": "/home/pixiu/.openclaw/workspace-libu_hr",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "zaochao",
+        "workspace": "/home/pixiu/.openclaw/workspace-zaochao",
+        "subagents": {
+          "allowAgents": []
+        }
       }
     ]
   },
@@ -121,6 +227,9 @@
           "apiKey": "AIzaSyAZduNj6cS-OmZMJ46OrNgl-ebll1t3rDc"
         }
       }
+    },
+    "sessions": {
+      "visibility": "all"
     },
     "elevated": {
       "enabled": false,
@@ -268,6 +377,7 @@
     "port": 18789,
     "mode": "local",
     "bind": "loopback",
+    "customBindHost": "0.0.0.0",
     "controlUi": {
       "allowedOrigins": [
         "*"
@@ -291,8 +401,7 @@
         "reminders.add",
         "sms.send"
       ]
-    },
-    "customBindHost": "0.0.0.0"
+    }
   },
   "skills": {
     "install": {
