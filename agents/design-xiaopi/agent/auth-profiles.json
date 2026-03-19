@@ -13,7 +13,8 @@
   "usageStats": {
     "minimax:cn": {
       "errorCount": 0,
-      "lastUsed": 1773902939319
+      "lastUsed": 1773904485285,
+      "lastFailureAt": 1773904485274
     }
   }
 }
