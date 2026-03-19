@@ -224,6 +224,26 @@
 
 ---
 
+## 模型分配方案（2026-03-18，皮休确认）
+
+基于96GB显存环境，各小皮推荐模型：
+
+| 角色 | 推荐模型 |
+|------|----------|
+| 小皮管家 | GPT-OSS-120B / Qwen3-235B |
+| 审核小皮 | Qwen3-32B |
+| 产品小皮 | Qwen3-32B |
+| 设计小皮 | Qwen3-VL (多模态) |
+| 研发小皮 | DeepSeek-Coder-33B |
+| 测试小皮 | DeepSeek-Coder-7B |
+| 部署小皮 | Qwen2.5-14B |
+
+**当前实际下载情况：**
+- qwen2.5:14b ✅ 已下载（给部署小皮用）
+- qwen3.5:122b 🔄 下载中（约82GB）
+
+**待办：** 等122b下载完成后，配置各小皮使用对应模型
+
 ## Ollama本地模型部署（2026-03-18）
 
 ### Ollama配置
@@ -235,15 +255,16 @@
 ### 已安装模型
 | 模型 | 大小 | 状态 |
 |------|------|------|
-| qwen2.5:7b | 4.7GB | 下载中... |
+| qwen2.5:14b | 9.0 GB | ✅ 可用 |
+| qwen3.5:122b | ~82GB | 🔄 下载中 |
 
 ### 使用方法
 ```bash
 # 运行模型
-ollama run qwen2.5:7b
+ollama run qwen2.5:14b
 
 # API调用
-curl http://localhost:11434/api/generate -d '{"model":"qwen2.5:7b","prompt":"你好"}'
+curl http://localhost:11434/api/generate -d '{"model":"qwen2.5:14b","prompt":"你好"}'
 ```
 
 *可用GPU加速，111.5GB显存可运行大模型*

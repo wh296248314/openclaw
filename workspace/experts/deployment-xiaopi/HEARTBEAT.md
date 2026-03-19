@@ -34,6 +34,7 @@
 - 是否有重要事项需要主动汇报
 - 是否有未完成的任务需要跟进
 - 是否有新知识需要学习
+- **各小皮学习进度**：每天9:30前检查 shared/notes/ 确认各小皮是否按时提交
 
 ## Self-Improving Check
 - Read /home/pixiu/.openclaw/workspace/experts/deployment-xiaopi/self-improving/heartbeat-rules.md
