@@ -62,8 +62,7 @@
     },
     "list": [
       {
-        "id": "main",
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        "id": "main"
       },
       {
         "id": "product-xiaopi",
