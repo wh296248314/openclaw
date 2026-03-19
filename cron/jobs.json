@@ -139,7 +139,7 @@
       "description": "每天早上回顾之前的记忆",
       "enabled": true,
       "createdAtMs": 1773585225108,
-      "updatedAtMs": 1773792019097,
+      "updatedAtMs": 1773878524738,
       "schedule": {
         "kind": "cron",
         "expr": "0 8 * * *"
@@ -155,14 +155,14 @@
         "channel": "last"
       },
       "state": {
-        "nextRunAtMs": 1773878400000,
-        "lastRunAtMs": 1773792000020,
+        "nextRunAtMs": 1773964800000,
+        "lastRunAtMs": 1773878400010,
         "lastRunStatus": "error",
         "lastStatus": "error",
-        "lastDurationMs": 19077,
+        "lastDurationMs": 124728,
         "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 4,
-        "runningAtMs": 1773878400002
+        "consecutiveErrors": 5,
+        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
       }
     },
     {
