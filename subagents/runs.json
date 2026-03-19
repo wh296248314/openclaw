@@ -1,36 +1,4 @@
 {
   "version": 2,
-  "runs": {
-    "8f75c6d7-fcfe-4b52-b7d3-4617713e4aa5": {
-      "runId": "8f75c6d7-fcfe-4b52-b7d3-4617713e4aa5",
-      "childSessionKey": "agent:taizi:subagent:18f9f909-dba9-4d37-a24a-23babfd8acf9",
-      "controllerSessionKey": "agent:taizi:main",
-      "requesterSessionKey": "agent:taizi:main",
-      "requesterOrigin": {
-        "channel": "feishu"
-      },
-      "requesterDisplayKey": "agent:taizi:main",
-      "task": "你扮演中书省，接收太子转来的旨意。请起草SCRM竞品分析的执行方案。\n\n📋 太子·旨意传达\n任务ID: JJC-20260319-001\n皇上原话: 对以下竞品进行分析：\n尘锋SCRM - 专注企业微信，客户量大\n微盛SCRM - 企业微信头部，增长快\n探马SCRM - 主打销售管理\n蝉客SCRM - 中小企业友好\n腾讯企点 - 腾讯官方，企业微信配套\n\n分析维度：产品功能、定价、目标客户、市场定位、优劣势（分析维度原文被截断，需在方案中补全）\n\n整理后的需求:\n  - 目标：完成5家SCRM竞品的全面分析\n  - 要求：按产品功能、定价、目标客户、市场定位、优劣势等维度展开\n  - 预期产出：竞品分析报告\n\n完成后：\n1. 更新看板状态为\"中书省起草中\"\n2. 将执行方案发给太子（sessions_send到agent:taizi:main）",
-      "cleanup": "keep",
-      "expectsCompletionMessage": true,
-      "spawnMode": "run",
-      "model": "minimax/MiniMax-M2.5-highspeed",
-      "workspaceDir": "/home/pixiu/.openclaw/workspace-taizi",
-      "runTimeoutSeconds": 0,
-      "createdAt": 1773914002843,
-      "startedAt": 1773914002890,
-      "archiveAtMs": 1773917602843,
-      "cleanupHandled": true,
-      "retainAttachmentsOnKeep": false,
-      "endedAt": 1773914017303,
-      "outcome": {
-        "status": "ok"
-      },
-      "endedReason": "subagent-complete",
-      "frozenResultText": "Now let me draft the execution plan and send it to 太子:",
-      "frozenResultCapturedAt": 1773914017330,
-      "endedHookEmittedAt": 1773914060608,
-      "cleanupCompletedAt": 1773914060608
-    }
-  }
+  "runs": {}
 }
