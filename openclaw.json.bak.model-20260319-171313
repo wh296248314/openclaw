@@ -144,8 +144,7 @@
             "shangshu",
             "zhongshu"
           ]
-        },
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        }
       },
       {
         "id": "shangshu",
@@ -161,8 +160,7 @@
             "gongbu",
             "libu_hr"
           ]
-        },
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        }
       },
       {
         "id": "hubu",
@@ -171,8 +169,7 @@
           "allowAgents": [
             "shangshu"
           ]
-        },
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        }
       },
       {
         "id": "libu",
@@ -181,8 +178,7 @@
           "allowAgents": [
             "shangshu"
           ]
-        },
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        }
       },
       {
         "id": "bingbu",
