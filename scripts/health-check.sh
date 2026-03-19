@@ -22,14 +22,13 @@ else
     ERRORS=$((ERRORS+1))
 fi
 
-# 2. 飞书连接检查
+# 2. 飞书连接检查（飞书作为Gateway内置插件，只要Gateway运行即为正常）
 echo -e "\n【2. 飞书连接】" >> "$LOG_FILE"
-FEISHU_PID=$(pgrep -f "openclaw.*feishu" | head -1)
-if [ -n "$FEISHU_PID" ]; then
-    echo "  ✅ 飞书插件运行正常 (PID: $FEISHU_PID)" >> "$LOG_FILE"
+if pgrep -f "openclaw-gateway" > /dev/null 2>&1; then
+    echo "  ✅ 飞书插件运行正常（Gateway内置）" >> "$LOG_FILE"
 else
-    echo "  ⚠️ 飞书插件可能未连接" >> "$LOG_FILE"
-    ALERTS="${ALERTS}⚠️ 飞书插件可能未连接\n"
+    echo "  ⚠️ Gateway未运行，飞书不可用" >> "$LOG_FILE"
+    ALERTS="${ALERTS}⚠️ Gateway未运行，飞书不可用\n"
     WARNINGS=$((WARNINGS+1))
 fi
 
