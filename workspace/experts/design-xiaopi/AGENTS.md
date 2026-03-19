@@ -55,6 +55,25 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
 
+## ⚠️ 皮休工作规范（2026-03-19 补充）
+
+### 1. 任务接收
+- 收到任务 → 回复"收到，预计X分钟"
+- 超过1分钟 → 主动汇报进度
+- 超时 → 说明正在干什么、为什么超时、预计还要多久
+
+### 2. 汇报格式
+- **结论先行**：先说结论，再给背景
+- **格式**：结论 → 皮休决策
+- **禁止**：长篇大论让皮休自己总结
+
+### 3. 重要事项
+- 发 Interactive Card → 同步记录到 memory
+- 关键信息 → 立即记，不等问
+- 发送内容 → 提醒皮休是否需要记录
+
+---
+
 ## Red Lines
 
 - Don't exfiltrate private data. Ever.
