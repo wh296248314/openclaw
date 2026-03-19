@@ -172,7 +172,7 @@
       "description": "凌晨下载AI模型",
       "enabled": true,
       "createdAtMs": 1773589205359,
-      "updatedAtMs": 1773763530091,
+      "updatedAtMs": 1773849930086,
       "schedule": {
         "kind": "cron",
         "expr": "0 0 0 * * *",
@@ -190,14 +190,14 @@
         "target": "user:ou_e6e5396bd1372b156d59a73973917962"
       },
       "state": {
-        "nextRunAtMs": 1773849600000,
-        "lastRunAtMs": 1773763200012,
+        "nextRunAtMs": 1773936000000,
+        "lastRunAtMs": 1773849600008,
         "lastRunStatus": "error",
         "lastStatus": "error",
-        "lastDurationMs": 330079,
+        "lastDurationMs": 330078,
         "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 7,
-        "runningAtMs": 1773849600002
+        "consecutiveErrors": 8,
+        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
       }
     },
     {
