@@ -207,7 +207,7 @@
       "description": "每天早上8:30发送早安问候（含天气）",
       "enabled": true,
       "createdAtMs": 1773630232481,
-      "updatedAtMs": 1773880266419,
+      "updatedAtMs": 1773884089184,
       "schedule": {
         "kind": "cron",
         "expr": "30 8 * * *"
@@ -216,7 +216,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "请发送早安问候晗哥，包含上海当前天气（用wttr.in获取）、日期、星期几，以及一句温暖的问候语"
+        "message": "给皮休发早安问候，包含广州天河的实时天气信息（用wttr.in查），气温穿衣建议，语气温暖亲切，记得叫他晗哥"
       },
       "delivery": {
         "mode": "announce",
@@ -225,10 +225,10 @@
       },
       "state": {
         "nextRunAtMs": 1773966600000,
-        "lastRunAtMs": 1773880200005,
+        "lastRunAtMs": 1773884060823,
         "lastRunStatus": "ok",
         "lastStatus": "ok",
-        "lastDurationMs": 66414,
+        "lastDurationMs": 12441,
         "lastDeliveryStatus": "delivered",
         "consecutiveErrors": 0,
         "lastDelivered": true
