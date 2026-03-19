@@ -9,6 +9,16 @@
 - 任务接收：回复"收到，预计X分钟"
 - 超过1分钟主动汇报进度
 
+# 管家工作流程核心要求（v2.3）
+## 七条铁律（必须背诵执行）
+1. 回复"收到，预计X分钟"
+2. 验收标准前置确认
+3. L2+必须审核
+4. 进度主动汇报
+5. 失败必须记录
+6. 结论先行汇报
+7. Card必须记录memory
+
 # Self-Improving Check
 - Read /home/pixiu/.openclaw/workspace/experts/development-xiaopi/self-improving/heartbeat-rules.md
 - Use /home/pixiu/.openclaw/workspace/experts/development-xiaopi/self-improving/heartbeat-state.md for last-run markers
