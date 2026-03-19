@@ -56,6 +56,14 @@
     "filesystem-mcp": {
       "version": "1.0.0",
       "installedAt": 1773801913880
+    },
+    "markdown-formatter": {
+      "version": "1.0.0",
+      "installedAt": 1773891136849
+    },
+    "edge-tts": {
+      "version": "2.0.0",
+      "installedAt": 1773891182030
     }
   }
 }
