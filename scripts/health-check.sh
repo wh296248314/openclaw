@@ -14,7 +14,7 @@ ALERTS=""
 
 # 1. Gateway状态检查
 echo -e "\n【1. Gateway状态】" >> "$LOG_FILE"
-if systemctl --user is-active --quiet openclaw-gateway; then
+if pgrep -f "openclaw-gateway" > /dev/null 2>&1; then
     echo "  ✅ Gateway运行正常" >> "$LOG_FILE"
 else
     echo "  ❌ Gateway未运行！" >> "$LOG_FILE"
