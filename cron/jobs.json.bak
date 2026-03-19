@@ -166,48 +166,13 @@
       }
     },
     {
-      "id": "7b8eb030-5ddc-4821-bee1-fc05a27f05d9",
-      "agentId": "development-xiaopi",
-      "name": "下载AI模型",
-      "description": "凌晨下载AI模型",
-      "enabled": true,
-      "createdAtMs": 1773589205359,
-      "updatedAtMs": 1773849930086,
-      "schedule": {
-        "kind": "cron",
-        "expr": "0 0 0 * * *",
-        "tz": "Asia/Shanghai"
-      },
-      "sessionTarget": "isolated",
-      "wakeMode": "now",
-      "payload": {
-        "kind": "agentTurn",
-        "message": "开始下载AI模型。先检查 qwen2.5:72b 是否已存在，若不存在则执行 ollama pull qwen2.5:72b 下载。下载完成后汇报结果（模型大小、下载状态）。"
-      },
-      "delivery": {
-        "mode": "announce",
-        "channel": "last",
-        "target": "user:ou_e6e5396bd1372b156d59a73973917962"
-      },
-      "state": {
-        "nextRunAtMs": 1773936000000,
-        "lastRunAtMs": 1773849600008,
-        "lastRunStatus": "error",
-        "lastStatus": "error",
-        "lastDurationMs": 330078,
-        "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 8,
-        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
-      }
-    },
-    {
       "id": "1ea07133-0b5e-4345-96b4-d7ac309f455d",
       "agentId": "main",
       "name": "早安问候-含天气",
       "description": "每天早上8:30发送早安问候（含天气）",
       "enabled": true,
       "createdAtMs": 1773630232481,
-      "updatedAtMs": 1773884073264,
+      "updatedAtMs": 1773884089184,
       "schedule": {
         "kind": "cron",
         "expr": "30 8 * * *"
@@ -216,7 +181,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "请发送早安问候晗哥，包含上海当前天气（用wttr.in获取）、日期、星期几，以及一句温暖的问候语"
+        "message": "给皮休发早安问候，包含广州天河的实时天气信息（用wttr.in查），气温穿衣建议，语气温暖亲切，记得叫他晗哥"
       },
       "delivery": {
         "mode": "announce",
