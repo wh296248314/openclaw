@@ -68,15 +68,13 @@
         "id": "product-xiaopi",
         "name": "product-xiaopi",
         "workspace": "/home/pixiu/.openclaw/workspace/experts/product-xiaopi",
-        "agentDir": "/home/pixiu/.openclaw/agents/product-xiaopi/agent",
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        "agentDir": "/home/pixiu/.openclaw/agents/product-xiaopi/agent"
       },
       {
         "id": "design-xiaopi",
         "name": "design-xiaopi",
         "workspace": "/home/pixiu/.openclaw/workspace/experts/design-xiaopi",
-        "agentDir": "/home/pixiu/.openclaw/agents/design-xiaopi/agent",
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        "agentDir": "/home/pixiu/.openclaw/agents/design-xiaopi/agent"
       },
       {
         "id": "development-xiaopi",
@@ -92,15 +90,13 @@
               ]
             }
           }
-        },
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        }
       },
       {
         "id": "testing-xiaopi",
         "name": "testing-xiaopi",
         "workspace": "/home/pixiu/.openclaw/workspace/experts/testing-xiaopi",
-        "agentDir": "/home/pixiu/.openclaw/agents/testing-xiaopi/agent",
-        "model": "ollama/qwen3.5:122b-a10b-q4_K_M"
+        "agentDir": "/home/pixiu/.openclaw/agents/testing-xiaopi/agent"
       },
       {
         "id": "deployment-xiaopi",
