@@ -22,7 +22,39 @@ MODEL_PRICING = {
     'google/gemini-2.5-pro':        {'in':1.25,'out':10.0, 'cr':0,    'cw':0},
 }
 
-OFFICIALS = [
+# 从agent_config.json动态加载小皮配置
+def load_xiaopi_officials():
+    cfg_file = pathlib.Path(__file__).resolve().parent.parent / 'data' / 'agent_config.json'
+    try:
+        cfg = json.loads(cfg_file.read_text())
+        officials = []
+        for agent in cfg.get('agents', []):
+            # 映射小皮到官职
+            mapping = {
+                'main': ('小皮管家', '尚书令', '👑'),
+                'product-xiaopi': ('产品小皮', '太子', '👑'),
+                'design-xiaopi': ('设计小皮', '礼部尚书', '🎨'),
+                'development-xiaopi': ('研发小皮', '工部尚书', '💻'),
+                'testing-xiaopi': ('测试小皮', '刑部尚书', '🧪'),
+                'deployment-xiaopi': ('部署小皮', '兵部尚书', '🚀'),
+                'audit-xiaopi': ('审核小皮', '侍中', '🔍'),
+            }
+            aid = agent.get('id', '')
+            if aid in mapping:
+                role, label, emoji = mapping[aid]
+                officials.append({
+                    'id': aid,
+                    'label': f'{label}',
+                    'role': role,
+                    'emoji': emoji,
+                    'rank': '小皮'
+                })
+        return officials
+    except:
+        return []
+
+# 优先使用小皮配置，否则用演示配置
+OFFICIALS = load_xiaopi_officials() or [
     {'id':'taizi',   'label':'太子',  'role':'太子',    'emoji':'🤴','rank':'储君'},
     {'id':'zhongshu','label':'中书省','role':'中书令',  'emoji':'📜','rank':'正一品'},
     {'id':'menxia',  'label':'门下省','role':'侍中',    'emoji':'🔍','rank':'正一品'},
@@ -65,7 +97,7 @@ def get_model(agent_id):
         if a.get('id') == agent_id:
             return normalize_model(a.get('model', default), default)
     # 兼容历史：太子曾使用 main 作为运行时 id
-    if agent_id == 'taizi':
+    if agent_id == 'taizi' or agent_id.endswith('-xiaopi'):
         for a in cfg.get('agents',{}).get('list',[]):
             if a.get('id') == 'main':
                 return normalize_model(a.get('model', default), default)
@@ -73,8 +105,11 @@ def get_model(agent_id):
 
 def scan_agent(agent_id):
     """从 sessions.json 读取 token 统计（累计所有 session）"""
-    sj = AGENTS_ROOT / agent_id / 'sessions' / 'sessions.json'
-    if not sj.exists() and agent_id == 'taizi':
+    sj = AGENTS_ROOT / agent_id
+    # 支持-xiaopi后缀
+    if not sj.exists() and agent_id.endswith('-xiaopi'):
+        sj = AGENTS_ROOT / agent_id / 'sessions' / 'sessions.json'
+    if not sj.exists() and agent_id == 'taizi' or agent_id.endswith('-xiaopi'):
         sj = AGENTS_ROOT / 'main' / 'sessions' / 'sessions.json'
     if not sj.exists():
         return {'tokens_in':0,'tokens_out':0,'cache_read':0,'cache_write':0,'sessions':0,'last_active':None,'messages':0}

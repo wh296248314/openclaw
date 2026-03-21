@@ -7,7 +7,7 @@
       "name": "每日设计趋势学习",
       "enabled": true,
       "createdAtMs": 1773584776403,
-      "updatedAtMs": 1773882120019,
+      "updatedAtMs": 1773968400112,
       "schedule": {
         "kind": "cron",
         "expr": "0 9 * * *",
@@ -25,15 +25,15 @@
         "channel": "last"
       },
       "state": {
-        "nextRunAtMs": 1773968400000,
-        "lastRunAtMs": 1773882000005,
+        "nextRunAtMs": 1774054800000,
+        "lastRunAtMs": 1773968400022,
         "lastRunStatus": "error",
         "lastStatus": "error",
-        "lastDurationMs": 120014,
-        "lastErrorReason": "timeout",
+        "lastDurationMs": 90,
+        "lastErrorReason": "model_not_found",
         "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 4,
-        "lastError": "cron: job execution timed out"
+        "consecutiveErrors": 5,
+        "runningAtMs": 1774054800006
       }
     },
     {
@@ -133,46 +133,13 @@
       }
     },
     {
-      "id": "fc1dc3e8-4f32-4515-b9a3-e6bf1610ded2",
-      "agentId": "development-xiaopi",
-      "name": "每日记忆回顾",
-      "description": "每天早上回顾之前的记忆",
-      "enabled": true,
-      "createdAtMs": 1773585225108,
-      "updatedAtMs": 1773878524738,
-      "schedule": {
-        "kind": "cron",
-        "expr": "0 8 * * *"
-      },
-      "sessionTarget": "isolated",
-      "wakeMode": "now",
-      "payload": {
-        "kind": "agentTurn",
-        "message": "执行记忆回顾：1) 读取memory/目录下的日记文件，了解昨天的工作内容；2) 读取MEMORY.md了解长期记忆；3) 用简短总结告知用户今天需要记得的重要事项。"
-      },
-      "delivery": {
-        "mode": "announce",
-        "channel": "last"
-      },
-      "state": {
-        "nextRunAtMs": 1773964800000,
-        "lastRunAtMs": 1773878400010,
-        "lastRunStatus": "error",
-        "lastStatus": "error",
-        "lastDurationMs": 124728,
-        "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 5,
-        "lastError": "Delivering to Feishu requires target <chatId|user:openId|chat:chatId>"
-      }
-    },
-    {
       "id": "1ea07133-0b5e-4345-96b4-d7ac309f455d",
       "agentId": "main",
       "name": "早安问候-含天气",
       "description": "每天早上8:30发送早安问候（含天气）",
       "enabled": true,
       "createdAtMs": 1773630232481,
-      "updatedAtMs": 1773884089184,
+      "updatedAtMs": 1774053000094,
       "schedule": {
         "kind": "cron",
         "expr": "30 8 * * *"
@@ -189,14 +156,15 @@
         "to": "ou_ea69bacf230a850e9bf2bd8ad49f42ef"
       },
       "state": {
-        "nextRunAtMs": 1773966600000,
-        "lastRunAtMs": 1773884060823,
-        "lastRunStatus": "ok",
-        "lastStatus": "ok",
-        "lastDurationMs": 12441,
-        "lastDeliveryStatus": "delivered",
-        "consecutiveErrors": 0,
-        "lastDelivered": true
+        "nextRunAtMs": 1774139400000,
+        "lastRunAtMs": 1774053000020,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 74,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 2,
+        "lastErrorReason": "model_not_found",
+        "lastError": "FailoverError: Unknown model: anthropic/test"
       }
     }
   ]

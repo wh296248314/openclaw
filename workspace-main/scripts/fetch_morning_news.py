@@ -16,33 +16,61 @@ DATA = pathlib.Path(__file__).resolve().parent.parent / 'data'
 
 # ── RSS 源配置 ──────────────────────────────────────────────────────────
 FEEDS = {
-    '政治': [
-        ('BBC World', 'https://feeds.bbci.co.uk/news/world/rss.xml'),
-        ('Reuters World', 'https://feeds.reuters.com/reuters/worldNews'),
-        ('AP Top News', 'https://rsshub.app/apnews/topics/ap-top-news'),
-    ],
-    '军事': [
-        ('Defense News', 'https://www.defensenews.com/rss/'),
-        ('BBC World', 'https://feeds.bbci.co.uk/news/world/rss.xml'),
-        ('Reuters', 'https://feeds.reuters.com/reuters/worldNews'),
-    ],
-    '经济': [
-        ('Reuters Business', 'https://feeds.reuters.com/reuters/businessNews'),
-        ('BBC Business', 'https://feeds.bbci.co.uk/news/business/rss.xml'),
-        ('CNBC', 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114'),
-    ],
     'AI大模型': [
-        ('Hacker News', 'https://hnrss.org/newest?q=AI+LLM+model&points=50'),
-        ('VentureBeat AI', 'https://venturebeat.com/category/ai/feed/'),
-        ('MIT Tech Review', 'https://www.technologyreview.com/feed/'),
+        ('36氪 AI', 'https://36kr.com/feed'),
+        ('钛媒体', 'https://www.tmtpost.com/rss'),
+        ('InfoQ AI', 'https://feed.infoq.cn/'),
+    ],
+    '技术开发': [
+        ('GitHub Trending', 'https://github.com/trending.atom'),
+    ],
+    'SCRM/产品': [
+        ('人人都是产品经理', 'https://www.woshipm.com/rss'),
+        ('产品壹佰', 'https://www.chanpin100.com/rss'),
+    ],
+    '股市/财经': [
+        ('36氪财经', 'https://36kr.com/feed'),
+        ('新浪财经', 'https://rss.sina.com.cn/news/china/focus15.xml'),
+    ],
+    '科技': [
+        ('钛媒体', 'https://www.tmtpost.com/rss'),
+        ('极客公园', 'https://www.geekpark.net/rss'),
+    ],
+    '时政': [
+        ('BBC World', 'https://feeds.bbci.co.uk/news/world/rss.xml'),
+        ('联合早报', 'https://www.zaobao.com.sg/rss/realtime/china'),
+    ],
+    '商业/财经': [
+        ('36氪', 'https://36kr.com/feed'),
+        ('虎嗅', 'https://www.huxiu.com/rss/0.xml'),
     ],
 }
 
 CATEGORY_KEYWORDS = {
-    '军事': ['war', 'military', 'troops', 'attack', 'missile', 'army', 'navy', 'weapons',
-              '战', '军', '导弹', '士兵', 'ukraine', 'russia', 'china sea', 'nato'],
     'AI大模型': ['ai', 'llm', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'deepseek',
-                'machine learning', 'neural', 'model', '大模型', '人工智能', 'chatgpt'],
+                'machine learning', 'neural', 'model', '大模型', '人工智能', 'chatgpt', 'llm', 'agent', 'AI'],
+    '技术开发': ['python', 'javascript', 'github', 'docker', 'kubernetes', 'api', 'sdk', 
+               '编程', '开发', '代码', '程序员', '架构', '开发'],
+    'SCRM/产品': ['产品', '用户', '运营', '增长', 'saas', 'crm', 'scrm', '私域', '营销', '获客', '产品'],
+    '股市/财经': ['股票', '股市', 'A股', '港股', '美股', '基金', '投资', '理财', '上市', '财报'],
+    '科技': ['科技', '手机', '电脑', '数码', '互联网', 'IT', '技术', '芯片', '5G'],
+    '时政': ['政治', '外交', '军事', '国际', '中美', '台湾', '南海', '联合国'],
+    '商业/财经': ['创业', '融资', '投资', '商业', '市场', '企业', '公司'],
+}
+
+
+
+
+CATEGORY_KEYWORDS = {
+    'AI大模型': ['ai', 'llm', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'deepseek',
+                'machine learning', 'neural', 'model', '大模型', '人工智能', 'chatgpt', 'llm', 'agent', 'AI'],
+    '技术开发': ['python', 'javascript', 'github', 'docker', 'kubernetes', 'api', 'sdk', 
+               '编程', '开发', '代码', '程序员', '架构', '开发'],
+    'SCRM/产品': ['产品', '用户', '运营', '增长', 'saas', 'crm', 'scrm', '私域', '营销', '获客', '产品'],
+    '股市/财经': ['股票', '股市', 'A股', '港股', '美股', '基金', '投资', '理财', '上市', '财报'],
+    '科技': ['科技', '手机', '电脑', '数码', '互联网', 'IT', '技术', '芯片', '5G'],
+    '时政': ['政治', '外交', '军事', '国际', '中美', '台湾', '南海', '联合国'],
+    '商业/财经': ['创业', '融资', '投资', '商业', '市场', '企业', '公司'],
 }
 
 def curl_rss(url, timeout=10):

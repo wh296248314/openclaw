@@ -64,6 +64,22 @@
     "edge-tts": {
       "version": "2.0.0",
       "installedAt": 1773891182030
+    },
+    "agent-team-orchestration": {
+      "version": "1.0.0",
+      "installedAt": 1773937921950
+    },
+    "agent-council": {
+      "version": "1.0.0",
+      "installedAt": 1773938042774
+    },
+    "vision": {
+      "version": "3.4.2",
+      "installedAt": 1773938281406
+    },
+    "image-vision": {
+      "version": "1.0.0",
+      "installedAt": 1773938341754
     }
   }
 }

@@ -2,6 +2,7 @@
 import json
 import pathlib
 import time
+import re
 import datetime
 import traceback
 import logging
@@ -41,6 +42,8 @@ def state_from_session(age_ms, aborted):
 
 
 def detect_official(agent_id):
+    # 去掉 -xiaopi 后缀
+    clean_id = re.sub(r'-xiaopi$', '', agent_id)
     mapping = {
         'main':    ('储君', '太子'),        # legacy id for taizi
         'taizi':   ('储君', '太子'),
@@ -54,8 +57,14 @@ def detect_official(agent_id):
         'gongbu':  ('工部尚书', '工部'),
         'libu_hr': ('吏部尚书', '吏部'),
         'zaochao': ('钦天监', '钦天监'),
+        'product': ('太子', '产品小皮'),
+        'design': ('礼部尚书', '设计小皮'),
+        'development': ('工部尚书', '研发小皮'),
+        'testing': ('刑部尚书', '测试小皮'),
+        'deployment': ('兵部尚书', '部署小皮'),
+        'audit': ('侍中', '审核小皮'),
     }
-    return mapping.get(agent_id, ('尚书令', '尚书省'))
+    return mapping.get(clean_id, mapping.get(agent_id, ('尚书令', '尚书省')))
 
 
 def load_activity(session_file, limit=12):

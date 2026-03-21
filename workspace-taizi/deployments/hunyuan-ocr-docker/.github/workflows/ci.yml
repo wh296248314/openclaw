@@ -1,0 +1,390 @@
+# ============================================================
+# ci.yml - GitHub Actions CI/CD 流水线
+# ============================================================
+# 功能：
+#   1. PR/推送时: 构建 Docker 镜像 + 单元测试
+#   2. 打 Tag 时: 构建并推送镜像到 Registry
+#   3. 手动触发: 支持选择目标环境
+#
+# 配置 secrets:
+#   DOCKERHUB_TOKEN     - Docker Hub Access Token
+#   DOCKERHUB_USERNAME  - Docker Hub 用户名
+#   (或使用 GHCR: GITHUB_TOKEN 已自动配置)
+#
+# 用法：
+#   push to main: 自动构建并推送到 Registry
+#   push tag v*:  生产级构建并推送
+#   workflow_dispatch: 手动选择构建类型
+# ============================================================
+
+name: HunyuanOCR CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: '部署目标'
+        required: true
+        default: 'local'
+        type: choice
+        options:
+          - local
+          - registry
+          - both
+      gpu_enabled:
+        description: '启用GPU构建'
+        required: false
+        default: 'true'
+        type: boolean
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/hunyuan-ocr
+  CUDA_VERSION: "12.1"
+  PYTHON_VERSION: "3.10"
+
+jobs:
+  # =============================================
+  # Job 1: 代码质量检查
+  # =============================================
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install lint tools
+        run: |
+          pip install flake8 black mypy isort > /dev/null 2>&1
+
+      - name: Run Flake8
+        run: |
+          # 检查 Python 文件
+          find . -name "*.py" -not -path "./.git/*" | xargs flake8 --max-line-length=120 --ignore=E501,W503 || true
+
+      - name: Run Black check
+        run: |
+          black --check --diff api/ scripts/ 2>/dev/null || true
+
+      - name: Run isort check
+        run: |
+          isort --check-only --diff api/ scripts/ 2>/dev/null || true
+
+  # =============================================
+  # Job 2: 构建 Docker 镜像 (CPU)
+  # =============================================
+  build-cpu:
+    name: Build Docker (CPU)
+    runs-on: ubuntu-latest
+    needs: lint
+    outputs:
+      image_tag_cpu: ${{ steps.meta.outputs.tags_cpu }}
+      digest_cpu: ${{ steps.build.outputs.digest }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu
+            ${{ env.IMAGE_NAME }}-cpu
+          tags: |
+            type=sha,prefix=
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Login to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to Docker Hub
+        if: github.event_name != 'pull_request' && vars.DOCKERHUB_USERNAME
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build CPU image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags_cpu }}
+          target: runtime-cpu
+          build-args: |
+            CUDA_VERSION=cpu
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu,push=true
+
+      - name: Image digest (CPU)
+        run: echo "Digest: ${{ steps.build.outputs.digest }}"
+
+      - name: Run Trivy vulnerability scanner
+        if: github.event_name != 'pull_request'
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy results
+        if: github.event_name != 'pull_request'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # =============================================
+  # Job 3: 构建 Docker 镜像 (GPU)
+  # =============================================
+  build-gpu:
+    name: Build Docker (GPU)
+    runs-on: ubuntu-latest-8-cores
+    if: github.event.inputs.gpu_enabled != 'false'
+    needs: lint
+    outputs:
+      image_tag_gpu: ${{ steps.meta.outputs.tags_gpu }}
+      digest_gpu: ${{ steps.build.outputs.digest }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker metadata (GPU)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-gpu
+            ${{ env.IMAGE_NAME }}-gpu
+          tags: |
+            type=sha,prefix=
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=gpu-latest,enable={{is_default_branch}}
+
+      - name: Login to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build GPU image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags_gpu }}
+          platforms: linux/amd64,linux/arm64
+          target: runtime-gpu
+          build-args: |
+            CUDA_VERSION=${{ env.CUDA_VERSION }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-gpu,push=true
+
+  # =============================================
+  # Job 4: 测试 (在容器内运行)
+  # =============================================
+  test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: build-cpu
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Pull CPU image
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu:${{ github.sha }}
+
+      - name: Run container
+        id: container
+        run: |
+          docker run -d --name hunyuan-ocr-test \
+            -e DEVICE=cpu \
+            -e LOG_LEVEL=DEBUG \
+            --entrypoint sleep \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu:${{ github.sha }} 3600
+
+      - name: Wait for container startup
+        run: |
+          echo "等待服务启动..."
+          sleep 10
+          docker logs hunyuan-ocr-test | tail -20
+
+      - name: Health check
+        run: |
+          for i in {1..20}; do
+            if docker exec hunyuan-ocr-test curl -sf http://localhost:8000/health > /dev/null 2>&1; then
+              echo "✅ 容器健康检查通过"
+              exit 0
+            fi
+            echo "尝试 $i/20..."
+            sleep 15
+          done
+          echo "❌ 健康检查超时"
+          docker logs hunyuan-ocr-test
+          exit 1
+
+      - name: Test root endpoint
+        run: |
+          docker exec hunyuan-ocr-test curl -sf http://localhost:8000/ | python3 -m json.tool
+
+      - name: Cleanup
+        if: always()
+        run: |
+          docker stop hunyuan-ocr-test && docker rm hunyuan-ocr-test || true
+
+  # =============================================
+  # Job 5: 部署到本地 (手动触发)
+  # =============================================
+  deploy-local:
+    name: Deploy to Local Host
+    runs-on: [self-hosted, linux]
+    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.deploy_target == 'local' || github.event.inputs.deploy_target == 'both')
+    needs: [build-cpu, build-gpu]
+    environment:
+      name: local
+      url: http://localhost:8000
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stop existing containers
+        run: |
+          docker-compose -f docker-compose.yml down 2>/dev/null || true
+          docker-compose -f docker-compose.gpu.yml down 2>/dev/null || true
+
+      - name: Pull latest images
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu:${{ github.sha }}
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-gpu:${{ github.sha }} || true
+
+      - name: Start CPU service
+        run: |
+          docker-compose -f docker-compose.yml up -d
+          echo "✅ CPU 服务已启动"
+
+      - name: Wait for service
+        run: |
+          for i in {1..60}; do
+            if curl -sf http://localhost:8000/health > /dev/null 2>&1; then
+              echo "✅ 服务已就绪"
+              exit 0
+            fi
+            echo "等待服务启动... ($i/60)"
+            sleep 10
+          done
+          echo "⚠️  服务启动超时，请检查日志"
+
+      - name: Verify deployment
+        run: |
+          curl -sf http://localhost:8000/health | python3 -m json.tool
+          curl -sf http://localhost:8000/ | python3 -m json.tool
+
+  # =============================================
+  # Job 6: 推送镜像到 Registry (Tag触发)
+  # =============================================
+  push-registry:
+    name: Push to Registry
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.deploy_target == 'registry'
+    needs: [build-cpu, build-gpu, test]
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Docker metadata (final tags)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cpu
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-gpu
+          tags: |
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Push all tags
+        run: |
+          echo "镜像已在上游 Job 中推送完成"
+          echo "可用标签:"
+          echo "  ghcr.io/${{ env.IMAGE_NAME }}-cpu:latest"
+          echo "  ghcr.io/${{ env.IMAGE_NAME }}-gpu:latest"
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            docker-compose.yml
+            docker-compose.gpu.yml
+            Dockerfile
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # =============================================
+  # Job 7: 部署报告
+  # =============================================
+  report:
+    name: Deployment Summary
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [lint, build-cpu, build-gpu, test, deploy-local, push-registry]
+    steps:
+      - name: Summary
+        run: |
+          echo "## HunyuanOCR CI/CD 构建报告" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | 状态 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint | ${{ needs.lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build CPU | ${{ needs.build-cpu.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build GPU | ${{ needs.build-gpu.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Deploy Local | ${{ needs.deploy-local.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Push Registry | ${{ needs.push-registry.result }} |" >> $GITHUB_STEP_SUMMARY

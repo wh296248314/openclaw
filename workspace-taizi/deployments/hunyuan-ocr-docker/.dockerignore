@@ -1,0 +1,45 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*.egg-info
+.eggs
+dist
+build
+.venv
+venv
+
+# CI/CD
+.github
+.github/workflows/*.yml
+.github/workflows/*.yaml
+
+# IDE
+.vscode
+.idea
+*.swp
+
+# Docs
+README.md
+docs
+*.md
+!requirements.txt
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Env
+.env
+.env.*
+.env.local
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db
+trivy-results.sarif

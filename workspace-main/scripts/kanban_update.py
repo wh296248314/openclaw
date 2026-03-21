@@ -232,16 +232,31 @@ def cmd_state(task_id, new_state, now_text=None):
     """更新任务状态（原子操作，含流转合法性校验）"""
     old_state = [None]
     rejected = [False]
+    reason = ['']
+    
     def modifier(tasks):
         t = find_task(tasks, task_id)
         if not t:
             log.error(f'任务 {task_id} 不存在')
             return tasks
         old_state[0] = t['state']
+        
+        # 🔒 产出物检查：从 Doing 推进到 Review 前必须验证产出物
+        if old_state[0] == 'Doing' and new_state == 'Review':
+            output = t.get('output', '').strip()
+            output_meta = t.get('outputMeta', {})
+            output_exists = output_meta.get('exists', False) if output_meta else False
+            if not output and not output_exists:
+                log.warning(f'⚠️ {task_id} 无产出物，禁止从 Doing → Review')
+                rejected[0] = True
+                reason[0] = f'⚠️ 任务无产出物，禁止推进！请先提交产出物（用 python3 kanban_update.py done {task_id} <产出物路径> <摘要>）'
+                return tasks
+        
         allowed = _VALID_TRANSITIONS.get(old_state[0])
         if allowed is not None and new_state not in allowed:
             log.warning(f'⚠️ 非法状态转换 {task_id}: {old_state[0]} → {new_state}（允许: {allowed}）')
             rejected[0] = True
+            reason[0] = f'非法状态转换 {old_state[0]} → {new_state}'
             return tasks
         t['state'] = new_state
         if new_state in STATE_ORG_MAP:
@@ -253,7 +268,7 @@ def cmd_state(task_id, new_state, now_text=None):
     atomic_json_update(TASKS_FILE, modifier, [])
     _trigger_refresh()
     if rejected[0]:
-        log.info(f'❌ {task_id} 状态转换被拒: {old_state[0]} → {new_state}')
+        log.info(f'❌ {task_id} 状态转换被拒: {old_state[0]} → {new_state} - {reason[0]}')
     else:
         log.info(f'✅ {task_id} 状态更新: {old_state[0]} → {new_state}')
 

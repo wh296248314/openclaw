@@ -1,0 +1,64 @@
+# ============================================================
+# docker-compose.yml - HunyuanOCR CPU版本
+# ============================================================
+# 用法:
+#   本机构建并运行:
+#     docker-compose up -d
+#
+#   使用预构建镜像运行:
+#     docker-compose -f docker-compose.yml up -d
+# ============================================================
+
+version: "3.8"
+
+services:
+  hunyuan-ocr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime-cpu
+      args:
+        CUDA_VERSION: cpu
+    container_name: hunyuan-ocr-cpu
+    image: hunyuan-ocr:latest
+    restart: unless-stopped
+    ports:
+      - "${OCR_PORT:-8000}:8000"
+    environment:
+      - MODEL_NAME=${MODEL_NAME:-Tencent/HunyuanOCR}
+      - MODEL_CACHE_DIR=/models
+      - DEVICE=cpu
+      - PORT=8000
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - HF_ENDPOINT=https://hf-mirror.com
+      - HF_HOME=/models
+    volumes:
+      # 模型缓存持久化 (避免每次重启重新下载)
+      - hunyuan-ocr-models:/models
+      # 可选：挂载额外图片目录
+      - ${IMAGE_DIR:-./images}:/data/images:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 0
+              capabilities: [gpu]
+    networks:
+      - hunyuan-ocr-net
+
+volumes:
+  hunyuan-ocr-models:
+    driver: local
+
+networks:
+  hunyuan-ocr-net:
+    driver: bridge
