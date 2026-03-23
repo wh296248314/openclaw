@@ -20,3 +20,7 @@ logs/config-audit.jsonl
 openclaw.json
 openclaw.json.bak.*
 update-check.json
+# Backup files
+openclaw.json.bak*
+cron/
+media/
