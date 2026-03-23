@@ -25,3 +25,4 @@ openclaw.json.bak*
 cron/
 media/
 linux-hwe-6.17*.tar.gz
+workspace/experts/deployment-xiaopi/linux-hwe-*/
