@@ -24,3 +24,4 @@ update-check.json
 openclaw.json.bak*
 cron/
 media/
+linux-hwe-6.17*.tar.gz
