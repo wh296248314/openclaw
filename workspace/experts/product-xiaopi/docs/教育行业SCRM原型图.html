@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教育SCRM系统原型</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#f0f2f5}
+.header{background:#001529;color:#fff;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:bold;display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;background:linear-gradient(135deg,#1890ff,#52c41a);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav{display:flex;gap:4px}
+.nav a{padding:8px 14px;color:rgba(255,255,255,0.65);text-decoration:none;border-radius:4px;font-size:14px}
+.nav a:hover,.nav a.active{color:#fff;background:rgba(255,255,255,0.1)}
+.user{display:flex;align-items:center;gap:10px}
+.avatar{width:32px;height:32px;background:#1890ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.container{max-width:1200px;margin:20px auto;padding:0 20px}
+.page{background:#fff;border-radius:8px;margin-bottom:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+.page-header{padding:16px 24px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}
+.page-title{font-size:16px;font-weight:600;color:#262626}
+.page-body{padding:24px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:4px;border:1px solid #d9d9d9;background:#fff;cursor:pointer;font-size:13px}
+.btn:hover{border-color:#1890ff;color:#1890ff}
+.btn-primary{background:#1890ff;color:#fff;border-color:#1890ff}
+.btn-success{background:#52c41a;color:#fff;border-color:#52c41a}
+.btn-warning{background:#faad14;color:#fff;border-color:#faad14}
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.stat-card{padding:16px;border-radius:8px;border:1px solid #f0f0f0}
+.stat-label{font-size:13px;color:#8c8c8c;margin-bottom:6px}
+.stat-value{font-size:24px;font-weight:600;color:#262626}
+.stat-change{font-size:12px;margin-top:4px}
+.stat-change.up{color:#52c41a}
+.stat-change.down{color:#ff4d4f}
+.tag{display:inline-block;padding:2px 6px;border-radius:4px;font-size:11px}
+.tag-blue{background:#e6f7ff;color:#1890ff}
+.tag-green{background:#f6ffed;color:#52c41a}
+.tag-orange{background:#fff7e6;color:#fa8c16}
+.tag-red{background:#fff1f0;color:#ff4d4f}
+.table{width:100%;border-collapse:collapse}
+.table th{background:#fafafa;padding:10px 12px;text-align:left;font-size:13px;font-weight:500;color:#262626;border-bottom:1px solid #f0f0f0}
+.table td{padding:10px 12px;font-size:13px;color:#595959;border-bottom:1px solid #f0f0f0}
+.table tr:hover{background:#fafafa}
+.flex{display:flex}
+.flex-center{display:flex;align-items:center}
+.flex-between{display:flex;justify-content:space-between;align-items:center}
+.gap-8{gap:8px}
+.gap-12{gap:12px}
+.mt-16{margin-top:16px}
+.mt-24{margin-top:24px}
+.mb-16{margin-bottom:16px}
+.chart{height:200px;background:linear-gradient(135deg,#f5f7fa,#e8ecef);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#8c8c8c;font-size:14px}
+.flow{display:flex;align-items:center;gap:8px;padding:16px 0;overflow-x:auto}
+.flow-step{text-align:center;flex:0 0 auto;min-width:80px}
+.flow-icon{width:40px;height:40px;background:#1890ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:18px}
+.flow-label{font-size:12px;color:#262626}
+.flow-arrow{color:#d9d9d9;font-size:18px;flex:0 0 auto}
+.sidebar{width:180px;flex-shrink:0}
+.sidebar-menu{background:#fff;border-radius:8px;overflow:hidden;border:1px solid #f0f0f0}
+.sidebar-menu a{display:block;padding:10px 16px;color:#595959;text-decoration:none;font-size:13px;border-left:3px solid transparent}
+.sidebar-menu a:hover{background:#fafafa}
+.sidebar-menu a.active{background:#e6f7ff;color:#1890ff;border-left-color:#1890ff}
+.content{flex:1;min-width:0}
+.tab{display:flex;border-bottom:1px solid #f0f0f0;margin-bottom:16px}
+.tab a{padding:10px 16px;color:#595959;text-decoration:none;font-size:13px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab a:hover{color:#1890ff}
+.tab a.active{color:#1890ff;border-bottom-color:#1890ff}
+.search{display:flex;gap:8px;margin-bottom:16px}
+.search input{flex:1;padding:6px 10px;border:1px solid #d9d9d9;border-radius:4px;font-size:13px}
+.list-item{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0}
+.list-item:last-child{border-bottom:none}
+.list-icon{width:36px;height:36px;background:#e6f7ff;color:#1890ff;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:16px;flex:0 0 auto}
+.list-content{flex:1;min-width:0}
+.list-title{font-size:13px;color:#262626}
+.list-desc{font-size:12px;color:#8c8c8c;margin-top:2px}
+.list-action{color:#1890ff;font-size:12px;margin-left:12px;flex:0 0 auto}
+.avatar-sm{width:28px;height:28px;background:#1890ff;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:0 0 auto}
+input[type="text"],select{padding:6px 10px;border:1px solid #d9d9d9;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">S</div>
+    <span>教育SCRM</span>
+  </div>
+  <nav class="nav">
+    <a href="#dashboard" class="active">首页</a>
+    <a href="#marketing">营销获客</a>
+    <a href="#customer">客户管理</a>
+    <a href="#sales">销售跟进</a>
+    <a href="#service">服务运营</a>
+    <a href="#academic">教务管理</a>
+  </nav>
+  <div class="user">
+    <span>王老师</span>
+    <div class="avatar">王</div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- 1. 首页仪表盘 -->
+<div class="page" id="dashboard">
+  <div class="page-header">
+    <div class="page-title">数据概览</div>
+    <div class="flex gap-8">
+      <select><option>最近7天</option><option>最近30天</option></select>
+      <button class="btn btn-primary">导出报表</button>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid grid-4 mb-16">
+      <div class="stat-card">
+        <div class="stat-label">本月新增线索</div>
+        <div class="stat-value">1,234</div>
+        <div class="stat-change up">↑ 23.5% 较上月</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">本月成交金额</div>
+        <div class="stat-value">¥89,560</div>
+        <div class="stat-change up">↑ 15.2% 较上月</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">本月转化率</div>
+        <div class="stat-value">12.8%</div>
+        <div class="stat-change down">↓ 2.1% 较上月</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">在读学员数</div>
+        <div class="stat-value">3,456</div>
+        <div class="stat-change up">↑ 8.3% 较上月</div>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="stat-card">
+        <div class="flex-between mb-16">
+          <div style="font-weight:600;">线索趋势</div>
+          <a class="list-action">详情 →</a>
+        </div>
+        <div class="chart">📈 趋势图表</div>
+      </div>
+      <div class="stat-card">
+        <div class="flex-between mb-16">
+          <div style="font-weight:600;">渠道来源分布</div>
+          <a class="list-action">详情 →</a>
+        </div>
+        <div class="chart">📊 饼图</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 营销获客 -->
+<div class="page" id="marketing">
+  <div class="page-header">
+    <div class="page-title">营销获客</div>
+    <button class="btn btn-primary">+ 创建活动</button>
+  </div>
+  <div class="page-body">
+    <div class="tab">
+      <a href="#" class="active">活码管理</a>
+      <a href="#">裂变活动</a>
+      <a href="#">优惠券</a>
+      <a href="#">体验课</a>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="搜索活动名称...">
+      <select><option>全部状态</option><option>进行中</option></select>
+      <button class="btn">搜索</button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>活动名称</th>
+          <th>类型</th>
+          <th>渠道</th>
+          <th>扫码人数</th>
+          <th>转化人数</th>
+          <th>转化率</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2024暑假班招生活码</td>
+          <td><span class="tag tag-blue">活码</span></td>
+          <td>企微群</td>
+          <td>1,234</td>
+          <td>156</td>
+          <td>12.6%</td>
+          <td><span class="tag tag-green">进行中</span></td>
+          <td><a class="list-action">编辑</a></td>
+        </tr>
+        <tr>
+          <td>老带新裂变活动</td>
+          <td><span class="tag tag-orange">裂变</span></td>
+          <td>海报</td>
+          <td>3,456</td>
+          <td>289</td>
+          <td>8.4%</td>
+          <td><span class="tag tag-green">进行中</span></td>
+          <td><a class="list-action">编辑</a></td>
+        </tr>
+        <tr>
+          <td>新学期优惠券</td>
+          <td><span class="tag tag-red">优惠券</span></td>
+          <td>全员</td>
+          <td>5,678</td>
+          <td>456</td>
+          <td>8.0%</td>
+          <td><span class="tag tag-blue">已发券</span></td>
+          <td><a class="list-action">编辑</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 3. 客户管理 -->
+<div class="page" id="customer">
+  <div class="page-header">
+    <div class="page-title">客户管理</div>
+    <div class="flex gap-8">
+      <button class="btn">导入线索</button>
+      <button class="btn btn-primary">+ 新建线索</button>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="flex gap-16">
+      <div class="sidebar">
+        <div class="sidebar-menu">
+          <a href="#" class="active">全部客户</a>
+          <a href="#">潜在客户</a>
+          <a href="#">意向客户</a>
+          <a href="#">成交客户</a>
+          <a href="#">已流失</a>
+        </div>
+      </div>
+      <div class="content">
+        <div class="search">
+          <input type="text" placeholder="搜索客户姓名/电话...">
+          <select><option>全部来源</option><option>活码</option><option>裂变</option></select>
+          <button class="btn">筛选</button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>意向课程</th>
+              <th>来源</th>
+              <th>标签</th>
+              <th>跟进人</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="flex-center gap-8"><div class="avatar-sm">张</div>张妈妈</div></td>
+              <td>数学思维课</td>
+              <td>裂变活动</td>
+              <td><span class="tag tag-blue">重点</span> <span class="tag tag-orange">高意向</span></td>
+              <td>李老师</td>
+              <td><span class="tag tag-green">跟进中</span></td>
+              <td><a class="list-action">跟进</a></td>
+            </tr>
+            <tr>
+              <td><div class="flex-center gap-8"><div class="avatar-sm">李</div>李爸爸</div></td>
+              <td>编程课</td>
+              <td>活码</td>
+              <td><span class="tag tag-blue">重点</span></td>
+              <td>王老师</td>
+              <td><span class="tag tag-orange">待联系</span></td>
+              <td><a class="list-action">跟进</a></td>
+            </tr>
+            <tr>
+              <td><div class="flex-center gap-8"><div class="avatar-sm">王</div>王家长</div></td>
+              <td>英语课</td>
+              <td>转介绍</td>
+              <td><span class="tag tag-green">已成交</span></td>
+              <td>张老师</td>
+              <td><span class="tag tag-blue">服务中</span></td>
+              <td><a class="list-action">查看</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 销售跟进 -->
+<div class="page" id="sales">
+  <div class="page-header">
+    <div class="page-title">销售跟进 - SOP任务</div>
+    <button class="btn btn-primary">+ 创建SOP</button>
+  </div>
+  <div class="page-body">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon">📱</div>
+        <div class="flow-label">扫码入群<br><small style="color:#8c8c8c">Day 0</small></div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">👋</div>
+        <div class="flow-label">欢迎语<br><small style="color:#8c8c8c">Day 0</small></div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">📚</div>
+        <div class="flow-label">发资料<br><small style="color:#8c8c8c">Day 1</small></div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">💬</div>
+        <div class="flow-label">顾问联系<br><small style="color:#8c8c8c">Day 2</small></div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">📅</div>
+        <div class="flow-label">预约体验<br><small style="color:#8c8c8c">Day 7</small></div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon">✅</div>
+        <div class="flow-label">成交<br><small style="color:#8c8c8c">Day 14</small></div>
+      </div>
+    </div>
+    
+    <div class="stat-card mt-24">
+      <div class="flex-between mb-16">
+        <div style="font-weight:600;">今日待办任务</div>
+        <span class="tag tag-red">12条待处理</span>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>客户</th>
+            <th>阶段</th>
+            <th>待执行动作</th>
+            <th>截止时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>张妈妈</td>
+            <td><span class="tag tag-blue">第3天</span></td>
+            <td>发送课程资料</td>
+            <td>今天 18:00</td>
+            <td><button class="btn btn-success" style="padding:4px 8px;font-size:12px">已完成</button></td>
+          </tr>
+          <tr>
+            <td>李爸爸</td>
+            <td><span class="tag tag-blue">第5天</span></td>
+            <td>电话回访</td>
+            <td>今天 20:00</td>
+            <td><button class="btn btn-primary" style="padding:4px 8px;font-size:12px">去执行</button></td>
+          </tr>
+          <tr>
+            <td>王家长</td>
+            <td><span class="tag tag-blue">第7天</span></td>
+            <td>预约体验课</td>
+            <td>明天 18:00</td>
+            <td><button class="btn btn-primary" style="padding:4px 8px;font-size:12px">去执行</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 5. 服务运营 -->
+<div class="page" id="service">
+  <div class="page-header">
+    <div class="page-title">服务运营 - 课后反馈</div>
+    <button class="btn btn-primary">+ 发送反馈</button>
+  </div>
+  <div class="page-body">
+    <div class="grid grid-2">
+      <div class="stat-card">
+        <div class="flex-between mb-16">
+          <div style="font-weight:600;">待发送反馈</div>
+          <span class="tag tag-orange">8条待发送</span>
+        </div>
+        <div class="list-item">
+          <div class="list-icon">📝</div>
+          <div class="list-content">
+            <div class="list-title">王小明 - 数学思维课</div>
+            <div class="list-desc">上课时间：今天 10:00-11:30</div>
+          </div>
+          <button class="btn btn-primary" style="padding:4px 8px;font-size:12px;flex:0 0 auto">发送反馈</button>
+        </div>
+        <div class="list-item">
+          <div class="list-icon">📝</div>
+          <div class="list-content">
+            <div class="list-title">李小红 - 英语课</div>
+            <div class="list-desc">上课时间：今天 14:00-15:30</div>
+          </div>
+          <button class="btn btn-primary" style="padding:4px 8px;font-size:12px;flex:0 0 auto">发送反馈</button>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="flex-between mb-16">
+          <div style="font-weight:600;">最近发送记录</div>
+          <a class="list-action">查看全部 →</a>
+        </div>
+        <div class="list-item">
+          <div class="list-icon" style="background:#f6ffed;color:#52c41a">✓</div>
+          <div class="list-content">
+            <div class="list-title">张同学 - 编程课 已发送</div>
+            <div class="list-desc">发送时间：昨天 16:30</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-icon" style="background:#f6ffed;color:#52c41a">✓</div>
+          <div class="list-content">
+            <div class="list-title">刘同学 - 美术课 已发送</div>
+            <div class="list-desc">发送时间：昨天 17:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card mt-24">
+      <div class="flex-between mb-16">
+        <div style="font-weight:600;">续费提醒</div>
+        <span class="tag tag-red">5条即将到期</span>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>学员</th>
+            <th>课程</th>
+            <th>到期时间</th>
+            <th>剩余课时</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>张同学</td>
+            <td>数学思维课</td>
+            <td>2024-03-25</td>
+            <td>3课时</td>
+            <td><button class="btn btn-warning" style="padding:4px 8px;font-size:12px">发送续费提醒</button></td>
+          </tr>
+          <tr>
+            <td>李同学</td>
+            <td>英语课</td>
+            <td>2024-03-28</td>
+            <td>5课时</td>
+            <td><button class="btn btn-warning" style="padding:4px 8px;font-size:12px">发送续费提醒</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 6. 教务管理 -->
+<div class="page" id="academic">
+  <div class="page-header">
+    <div class="page-title">教务管理 - 排课与考勤</div>
+    <button class="btn btn-primary">+ 新建排课</button>
+  </div>
+  <div class="page-body">
+    <div class="grid grid-2">
+      <div class="stat-card">
+        <div class="flex-between mb-16">
+          <div style="font-weight:600;">今日课程</div>
+          <span class="tag tag-blue">共12节课</span>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>课程</th>
+              <th>班级</th>
+              <th>考勤</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>09:00-10:30</td>
+              <td>数学思维</td>
+              <td>A班</td>
+              <td><span class="tag tag-green">已签到12/15</span></td>
+            </tr>
+            <tr>
+              <td>10:30-12:00</td>
+              <td>英语</td>
+              <td>B班</td>
+              <td><span class="tag tag-blue">进行中</span></td>
+            </tr>
+            <tr>
+              <td>14:00-15:30</td>
+              <td>编程</td>
+              <td>C班</td>
+              <td><span class="tag tag-orange">待上课</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="stat-card">
+        <div class="flex-between mb-16">
+          <div style="font-weight:600;">考勤统计</div>
+          <a class="list-action">详情 →</a>
+        </div>
+        <div class="chart">📊 考勤统计图表</div>
+      </div>
+    </div>
+    
+    <div class="stat-card mt-24">
+      <div class="flex-between mb-16">
+        <div style="font-weight:600;">学员考勤记录</div>
+        <input type="text" placeholder="搜索学员姓名..." style="width:180px">
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>学员</th>
+            <th>课程</th>
+            <th>上课时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="flex-center gap-8"><div class="avatar-sm">王</div>王小明</div></td>
+            <td>数学思维</td>
+            <td>今天 09:00</td>
+            <td><span class="tag tag-green">已签到</span></td>
+            <td><a class="list-action">详情</a></td>
+          </tr>
+          <tr>
+            <td><div class="flex-center gap-8"><div class="avatar-sm">李</div>李小红</div></td>
+            <td>英语</td>
+            <td>今天 10:30</td>
+            <td><span class="tag tag-orange">迟到</span></td>
+            <td><a class="list-action">详情</a></td>
+          </tr>
+          <tr>
+            <td><div class="flex-center gap-8"><div class="avatar-sm">张</div>张小明</div></td>
+            <td>编程</td>
+            <td>今天 14:00</td>
+            <td><span class="tag tag-blue">未上课</span></td>
+            <td><a class="list-action">详情</a> <a class="list-action">请假</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
