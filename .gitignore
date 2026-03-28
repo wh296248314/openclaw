@@ -26,3 +26,13 @@ cron/
 media/
 linux-hwe-6.17*.tar.gz
 workspace/experts/deployment-xiaopi/linux-hwe-*/
+
+# Archives and backups (generated locally)
+archives/
+backup/*.tar.gz
+backup/*.zip
+experts/design-xiaopi/.git
+# Nested git repos
+experts/*/.git
+experts/*/skills/
+experts/*/agents/
