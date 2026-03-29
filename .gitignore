@@ -13,6 +13,7 @@ logs/
 !workspace/
 !scripts/
 !extensions/
+
 # Runtime data
 feishu/dedup/testing.json
 identity/device-auth.json
@@ -20,6 +21,7 @@ logs/config-audit.jsonl
 openclaw.json
 openclaw.json.bak.*
 update-check.json
+
 # Backup files
 openclaw.json.bak*
 cron/
@@ -29,10 +31,19 @@ workspace/experts/deployment-xiaopi/linux-hwe-*/
 
 # Archives and backups (generated locally)
 archives/
-backup/*.tar.gz
-backup/*.zip
-experts/design-xiaopi/.git
-# Nested git repos
+backup/
+.clawhub/
+skills/
+
+# Nested git repos (remaining .git directories in experts)
 experts/*/.git
-experts/*/skills/
-experts/*/agents/
+
+# Expert runtime files (don't track)
+experts/*/.openclaw/
+experts/*/self-improving/
+
+# Development images (large binaries, don't track)
+experts/development-xiaopi/*.png
+experts/development-xiaopi/*.jpg
+experts/development-xiaopi/*.jpeg
+experts/development-xiaopi/archive/
