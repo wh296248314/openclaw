@@ -1,0 +1,5 @@
+# 消息队列
+# 格式：每行一个JSON
+# {time: ISO时间, from: 任务名, content: 内容, priority: normal}
+{"time": "2026-03-29T12:45:00", "from": "日报汇总推送", "content": "📊 【日报汇总】2026-03-28各小皮日报已汇总，详见共享文档", "priority": "high"}
+{"time": "2026-03-29T14:04:00", "from": "健康检查告警", "content": "🚨 【健康检查告警】⏰ 2026-03-29 14:04\n🔍 检查项：Gateway/小皮状态/cron任务\n\n⚠️ 问题：\n1. product-xiaopi每日复盘 - 连续超时错误（8次）⚠️未改善\n2. 早安问候-含天气 - 飞书channel配置错误（6次）\n3. 技能发现学习 - 飞书channel配置错误（5次）\n4. 每周设计灵感收集 - 连续超时错误（3次）\n\n✅ Gateway运行正常（PID 705733，RPC: ok）\nℹ️ Gateway曾重启（PID从613572变为705733）\n\n📋 建议：\n1. 【紧急】product-xiaopi每日复盘连续超时8次，建议增加timeout至600s\n2. 飞书channel错误：isolated session无法发消息，改为写消息队列\n3. 检查xiaopi-health-check.sh脚本是否正确执行", "priority": "high"}

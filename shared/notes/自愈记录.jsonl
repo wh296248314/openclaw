@@ -1,0 +1,2 @@
+# 自愈记录
+# 格式：每行一个JSON {"task": "任务名", "attempt": N, "action": "做了什么", "result": "ok|fail", "time": "ISO时间"}
